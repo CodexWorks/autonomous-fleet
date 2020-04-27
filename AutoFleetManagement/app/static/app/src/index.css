@@ -1,0 +1,230 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* Buttons*/
+
+.login_button{
+    height: 57px;
+    width: 167px;
+    top: 30%;
+    font-size: 2.6vmin;
+    cursor: pointer;
+    box-shadow: rgba(255, 255, 255, 0.05) 0px 3px 20px;
+    border: 1px solid #2C3E50;
+    background-color: #7DBBD8;
+    color: #2C3E50;
+    outline: none;
+    border-radius: 20px 20px 20px 20px;
+    margin-right: 10px;
+}
+
+.register_button{
+    height: 57px;
+    width: 167px;
+    top: 30%;
+    font-size: 2.6vmin;
+    cursor: pointer;
+    box-shadow: rgba(255, 255, 255, 0.05) 0px 3px 20px;
+    border: 1px solid #2C3E50;
+    background-color: #F39C12;
+    color: #2C3E50;
+    outline: none;
+    border-radius: 20px 20px 20px 20px;
+    margin-right: 80px;
+}
+
+/*Main container*/
+
+.main-container{
+    background-image: url("./assets/rhys-moult-7eaFIKeo1MQ-unsplash.jpg");
+    height:100%;
+    width:100%;
+}
+
+/* Login page */
+.login_container{
+    margin-top: 9%;
+    height: 76%;
+    width: 500px;
+}
+.login_second_container{
+    height: 77%;
+    background-color:#F2E7E7;
+    border: 20px solid #ced4da7a;
+    width: 536px;
+}
+.login-btn{
+    background-color: #2ECC71;
+    border: none;
+    margin-top: 40px;
+}
+.login-btn:hover{
+    background-color: #f39c12;
+}
+.login-form{
+    width:465px;
+
+}
+.forgot-password{
+    margin-top: 40px;
+    text-align: -webkit-center;
+}
+.new-account{
+    text-align: -webkit-center;
+}
+.user-types{
+    background-color:transparent;
+    border:none;
+}
+
+
+/* General elements*/
+input{
+    height: 48px;
+}
+
+
+/* General elements customization*/
+.radio-label{
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+/* Logo */
+.logo-img{
+    width:50%;
+}
+.logo-container{
+    margin-left: 50px;
+}
+
+/* Sidebar */
+.navbar-nav>.messages-menu>.dropdown-menu li .menu>li>a>div>img {
+    margin: auto 10px auto auto;
+    width: 40px;
+    height: 40px;
+}
+.navbar-nav>.messages-menu>.dropdown-menu li .menu>li>a ,
+.navbar-nav>.notifications-menu>.dropdown-menu li .menu>li>a{
+    margin: 0;
+    padding: 10px 10px;
+    display: block;
+    white-space: nowrap;
+    border-bottom: 1px solid #f4f4f4;
+}
+.navbar-nav>.messages-menu>.dropdown-menu li .menu>li>a>h4 {
+    padding: 0;
+    margin: 0 0 0 45px;
+    color: #333;
+    font-size: 15px;
+    position: relative;
+}
+.navbar-nav>.messages-menu>.dropdown-menu li .menu>li>a>p {
+    margin: 0 0 0 45px;
+    font-size: 12px;
+    color: #888888;
+}
+
+.sidebar{
+    width:320px;
+    background-color:#7dbbd8;
+    transition: all 0.5s  ease-in-out;
+    height:850px;
+}
+.bg-default{
+    background-color:#7dbbd8;
+}
+.sidebar ul{
+    list-style:none;
+    margin:0px;
+    padding:0px;
+    border-bottom: 1px solid #2C3E50;
+}
+.sidebar li {
+    height: 8%;
+    padding: 5%;
+    border-top: 1px solid #2C3E50;
+}
+.sidebar li a,
+.sidebar li a.collapsed.active{
+    display:block;
+    padding:8px 12px;
+    color:#2C3E50;
+    border-left:0px solid #dedede;
+    text-decoration:none
+}
+.sidebar li a.active{
+    background-color:#000;
+    border-left:5px solid #dedede;
+    transition: all 0.5s  ease-in-out
+}
+.sidebar li a i{
+    padding-right:5px;
+}
+.sidebar ul li .sub-menu li a{
+    position:relative
+}
+.sidebar ul li .sub-menu li a:before{
+    font-family: FontAwesome;
+    content: "\f105";
+    display: inline-block;
+    padding-left: 0px;
+    padding-right: 10px;
+    vertical-align: middle;
+}
+.sidebar ul li .sub-menu li a:hover:after {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 0;
+    width: 5px;
+    background-color: #111;
+    height: 100%;
+}
+.sidebar ul li .sub-menu li a:hover{
+    background-color:#222;
+    padding-left:20px;
+    transition: all 0.5s  ease-in-out
+}
+.sub-menu{
+    border-left:5px solid #dedede;
+}
+.sidebar li a .nav-label,
+.sidebar li a .nav-label+span{
+    transition: all 0.5s  ease-in-out
+}
+.sidebar.fliph li a .nav-label,
+.sidebar.fliph li a .nav-label+span{
+    display:none;
+    transition: all 0.5s  ease-in-out
+}
+.sidebar.fliph {
+    width: 42px;transition: all 0.5s  ease-in-out;
+}
+.sidebar.fliph li{
+    position:relative
+}
+.sidebar.fliph .sub-menu {
+    position: absolute;
+    left: 39px;
+    top: 0;
+    background-color: #222;
+    width: 150px;
+    z-index: 100;
+}
+
+.sidebar-image{
+    height: 81%;
+    position: relative;
+    margin-right: 10px;
+}
+
+.sidebar-image2{
+    height: 70%;
+    position: relative;
+    margin-right: 10px;
+}
