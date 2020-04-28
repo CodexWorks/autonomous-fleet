@@ -1,25 +1,20 @@
-import bcrypt as bcrypt
-from flask import request, render_template, jsonify
+from flask import request, jsonify
 from flask import Blueprint
 from firebase_admin import auth
-from flask_jwt_extended import JWTManager
 from flask_jwt_extended import (create_access_token)
-user = Blueprint('user', __name__)
 
+user = Blueprint('user', __name__)
 
 @user.route("/connect", methods=["POST"])
 def connect():
     if request.method == "POST":
         email = request.get_json()["email"]
-        #password = request.get_json()["password"]
-
+        password = request.get_json()["password"]
         user = auth.get_user_by_email(email)
-
         access_token = create_access_token(
             identity={'email': user.email})
         result = access_token
         return result
-
 
 @user.route("/register", methods=["POST"])
 def register():
@@ -35,5 +30,4 @@ def register():
             'email': email,
             'password': password
         }
-
         return jsonify({'result': result})

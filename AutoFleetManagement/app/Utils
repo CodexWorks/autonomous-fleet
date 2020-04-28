@@ -1,0 +1,7 @@
+For database migrations:
+Run following commands from terminal
+1. flask db init
+2. flask db migrate -m "<message>"
+3. flask db upgrade
+
+In app/config/credentials.ini set your own connection information to be used for PostgreSql

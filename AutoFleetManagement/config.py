@@ -1,59 +1,47 @@
 import os
-from json import load as load_json_file
-import fireo
+from configparser import ConfigParser
+
+import sqlalchemy
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-class DevelopmentConfig(object):
+class Config(object):
     # Flask
     SECRET_KEY = 'SECRET_KEY'
     TEMPLATES_AUTO_RELOAD = True
     DEBUG = True
-    SEND_FILE_MAX_AGE_DEFAULT = 0
+
+    path = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(path)
+
+    # Create a parser
+    parser = ConfigParser()
+
+    # Read config file
+    parser.read("app/config/credentials.ini")
+
+    # Get section, default to postgresql
+    db = {}
+    section = 'postgresql'
+    if parser.has_section(section):
+        params = parser.items(section)
+        for param in params:
+            db[param[0].encode('utf-8')] = param[1].encode('utf-8')
+
+    url = 'postgresql://{}:{}@{}:{}/{}'
+    url = url.format(params[2][1], params[3][1], params[0][1], \
+                     int(params[4][1]), params[1][1])
+
+    # Connect to the PostgreSQL server
+    #con = sqlalchemy.create_engine(url, client_encoding='utf8')
+
+
+
+    SQLALCHEMY_DATABASE_URI = url
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     #Flask-Assets
     ASSETS_DEBUG = False
 
-    # Flask-Via
-    #VIA_ROUTES_MODULE = "app.routes"
-
-    #Flask-Security
-    #SECURITY_REGISTERABLE = True
-    #SECURITY_TRACKABLE = True
-    #SECURITY_SEND_REGISTER_EMAIL = False
-    #SECURITY_LOGIN_URL = '/login/'
-    #SECURITY_LOGOUT_URL = '/logout/'
-    #SECURITY_REGISTER_URL = '/register/'
-    #SECURITY_POST_LOGIN_VIEW = "/"
-    #SECURITY_POST_LOGOUT_VIEW = "/"
-    #SECURITY_POST_REGISTER_VIEW = "/"
-    #SECURITY_LOGIN_USER_TEMPLATE = 'security/login.html'
-    #SECURITY_REGISTER_USER_TEMPLATE = 'security/register.html'
-
-
     #Flask-Script
     APP_FOLDER = "app/"
-
-    #Flask-Uploads
-    UPLOADED_USER_DEST = APP_FOLDER + "static/img/user"
-    UPLOADED_USER_URL = 'http://0.0.0.0:8000/user/upload'
-
-    #OAUTH LOGIN
-    #OAUTH_CREDENTIALS = {
-    #    'google': {
-    #        'id': '854631142271-srib07p7ggb9d3q312257ub3vjjjk0eb.apps.googleusercontent.com',
-    #        'secret': 'RxNi3UvBwumuFXPm5gmGOIqY'
-    #    }
-    #}
-
-    #with open("app/config/client_secrets.json") as fd:
-    #    OAUTH_DATA = load_json_file(fd)
-    #OAUTH_CLIENT_ID = OAUTH_DATA["web"]["client_id"]
-    #OAUTH_URI = OAUTH_DATA["web"]["auth_uri"]
-    #OAUTH_TOKEN_URI = OAUTH_DATA["web"]["token_uri"]
-    #OAUTH_CLIENT_SECRET = OAUTH_DATA["web"]["client_secret"]
-
-    fireo.connection(from_file="C:/Users/Izabella.Varga/Downloads/oceanic-hangout-267217-dddf5d27745a.json")
-
-app_config = {
-    'development': DevelopmentConfig
-}

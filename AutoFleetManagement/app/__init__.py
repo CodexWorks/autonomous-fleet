@@ -1,28 +1,30 @@
 from firebase_admin import credentials
-from flask import Flask, render_template, current_app
+from flask import Flask
 from flask_jwt_extended import JWTManager
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 
-from config import app_config
+from config import Config
 import firebase_admin
 
-def create_app(config_name):
-    app = Flask(__name__)
-    #, static_folder="static/app", template_folder="static/app/public"
-    app.config.from_object(app_config[config_name])
+# Initialize app
+app = Flask(__name__)
+app.config.from_object(Config)
+JWTManager(app)
 
-    app_credentials = credentials.Certificate("app/config/oceanic-hangout-267217-dddf5d27745a.json")
-    firebase_admin.initialize_app(app_credentials)
+# Initialize db
+db = SQLAlchemy(app)
+db.init_app(app)
+migrate = Migrate(app, db)
+migrate.init_app(app, db)
+# Set credentials for firebase
+app_credentials = credentials.Certificate("app/config/oceanic-hangout-267217-dddf5d27745a.json")
+firebase_admin.initialize_app(app_credentials)
+
+# Blueprints
+from app.web.controllers.user import UserController as user_blueprint
+from app.web.controllers.example import ExampleController as example_blueprint
+app.register_blueprint(user_blueprint.user, url_prefix='/user')
+app.register_blueprint(example_blueprint.example, url_prefix='/example')
 
 
-
-    from .web.controllers.user import UserController as user_blueprint
-    app.register_blueprint(user_blueprint.user, url_prefix='/user')
-
-    JWTManager(app)
-    #@app.route('/', methods=['GET'])
-    #@app.route('/home', methods=['GET'])
-    #def index():
-    #    return render_template("templates/index.html")
-
-
-    return app
