@@ -1,0 +1,21 @@
+image: registry.github:com/CodexWorks/autonomous-fleet #registry name(CI)
+
+variables:
+  TERM: dumb
+  NODE_OPTIONS: --max-old-space-size=4096
+
+stages:
+  - test_spec
+  
+test:
+
+  tags:
+    - docker
+  only:
+    - master
+  script:
+    - sh -xe startProtractor.sh
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""

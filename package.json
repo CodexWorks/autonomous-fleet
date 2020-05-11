@@ -1,0 +1,30 @@
+{
+  "name": "untitled",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "update-webdriver": "./node_modules/.bin/webdriver-manager update",
+    "postinstall": "node_modules/.bin/webdriver-manager update",
+    "instGlobal": "npm install -g protractor",
+    "pretest": "npm install",
+    "tsc": "./node_modules/.bin/tsc --pretty",
+    "webdrvGl": "webdriver-manager update",
+    "protractor": "./node_modules/.bin/protractor protractor.conf.js --suite all",
+    "globalProtractor": "protractor protractor.conf.js --suite all",
+    "test": "npm run protractor"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bwip-js": "^1.7.2",
+    "faker": "^4.1.0",
+    "protractor": "^5.4.4",
+    "request-promise": "^4.2.4",
+    "selenium-webdriver": "^4.0.0-alpha.7"
+  },
+  "devDependencies": {
+    "jasmine-spec-reporter": "^4.2.1"
+  }
+}
