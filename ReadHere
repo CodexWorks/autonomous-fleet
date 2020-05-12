@@ -1,0 +1,22 @@
+Functions folder - holder for project functions
+    -> Dependencies folder - holder for all scripts dependencies(such as mapped buttons);
+    -> General functions folder - holder for usual functions +- used in all scripts, such as element interaction/loading timers etc;
+    -> Action House / Logistics ERP / Trip Planner - functions used only in those sections;
+    -> Index - used to index all project functions with a single call / script implementation, this way all functions are available within a single import line;
+
+Refactoring folder - Older working scripts that require changes;
+Regression folder - Working scripts that are executed on a daily basis;
+Work in progress - New tests that are under development;
+
+Important mentions from config file
+
+directConnect:true – Removes the need to start a selenium server and run the tests directly on the browser.
+    This saves the need to start a selenium server each time tests have to be executed.
+
+‘shardTestFiles’: true – with this option, the browser starts a new instance after each test (the cache/passwords/previous
+    options will be deleted before the each execution). This saved our project a lot of headaches due to weird interactions
+       between saved password/ saved logins and pages not refreshing when getting to the next test suite.
+       It’s highly recommended to use this option because each new test case will run independently from the last one.
+
+‘maxInstances’: 1, – set how many test will be executed in parallel, this option works locally and on the CI as well.
+    Should stick to two or three because this will take a lot of computing power if more than that will be picked.
