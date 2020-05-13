@@ -10,7 +10,7 @@ exports.config = {
         'browserName': 'chrome',
         chromeOptions: {
             args: [
-                //"--headless",
+                //"--headless",  -> will run the tests in headless mode, w/o UI.
                 "--no-sandbox", "--disable-notifications"]
         },
         acceptInsecureCerts : true,
@@ -20,12 +20,12 @@ exports.config = {
         }
     },
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 30000
+        defaultTimeoutInterval: 30000  // default timeout interval
                 },
                 suites:{
-                    all: ['Regression/*.js'],
+                    all: ['Regression/*.js'], // -> will run all test in the folder
         sandbox: [
-            'Regression/Automation_Test_1.js'
+            'Regression/Automation_Test_1.js' // -> will run only the specific test
         ]
     },
     onPrepare: function() {
