@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .web.controllers.example import example_controller
+
+from . import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('logistics_erp/example1',example_controller.get_logistics_erp, name="example1")
+    path('auction_house/', views.get_text)
 ]

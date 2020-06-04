@@ -1,18 +1,20 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
 
+const text = ''
 const AuctionHouse = () => {
      useEffect(() => {
         const fetchData = async () => {
             const result = await axios(
-                'auction_house/example2',
+                'auction_house/',
             );
               console.log(result.data);
+              text = result.data;
             };
 
             fetchData();
      }, [])
-    return (<div>Auction House Module</div>)
+    return (<div>{text}</div>)
 
 };
 
