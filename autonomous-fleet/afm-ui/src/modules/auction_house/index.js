@@ -1,22 +1,14 @@
 import React, {useEffect} from 'react';
-import axios from 'axios';
+import GetService from '../../services/GetService'
 
 let text = '';
 const AuctionHouse = () => {
-     useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios(
-                'auction_house/',
-            );
-            
-              console.log(result.data);
-              text = result.data;
-            };
+    useEffect(() => {
+        GetService.fetchData();
+    }, [])
 
-            fetchData();
-     }, [])
+
     return (<div>{text}</div>)
-
 };
 
 
