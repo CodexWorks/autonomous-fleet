@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
-import GetService from '../../services/GetService'
+import DataService from '../../services/DataService'
 
 let text = '';
 const AuctionHouse = () => {
     useEffect(() => {
-        GetService.fetchData();
+        DataService.getAuctionHouseData();
     }, [])
 
 
