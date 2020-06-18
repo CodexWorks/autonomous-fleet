@@ -1,30 +1,87 @@
-import React, { useState }  from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import modules from './modules';
+import MainNavbarMenu from './components/MainNavbarMenu';
+import SideNavbarMenu from './components/SideNavbarMenu';
+import './css/App.css';
+import './js/main.js';
 
-function App() {
-    const [currentTab, setCurrentTab] = useState('dashboard');
+export default class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      currentTab: 'dashboard',
+      isLoggedIn: false,
+      user: null,
+    };
+
+    // this.handleLogin = this.handleLogin.bind(this);
+    // this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  test() {
+    alert('test test');
+  }
+
+  // handleLogin() {
+  //   this.setState({
+  //     user: {
+  //       name: 'John Doe',
+  //       email: 'test@test.tst',
+  //       id: 0,
+  //     },
+  //   });
+  // }
+
+  // handleLogout() {
+  //   this.setState({ user: null });
+  // }
+
+  render() {
     return (
-       <Router>
-        <div className="App">
-          <header className="App-header">
-            <ul className="App-nav">
-              {modules.map(module => ( // with a name, and routes
-                  <li key={module.name} className={currentTab === module.name ? 'active' : ''}>
-                    <Link to={module.routeProps.path} onClick={() => setCurrentTab(module.name)}>{module.name}</Link>
+      <Fragment>
+        <Router>
+          <div className='App'>
+            <header className='App-header'></header>
+            <div className='wrapper'>
+              <SideNavbarMenu />
+              <div id='content'>
+                <MainNavbarMenu
+                  user={this.state.user}
+                  onTestClick={this.test}
+                />
+              </div>
+            </div>
+            <aside id='content'>
+              <ul className='App-nav'>
+                {modules.map((
+                  module // with a name, and routes
+                ) => (
+                  <li
+                    key={module.name}
+                    className={
+                      this.state.currentTab === module.name ? 'active' : ''
+                    }
+                  >
+                    <Link
+                      to={module.routeProps.path}
+                      onClick={() => this.setState({ currentTab: module.name })}
+                    >
+                      {module.name}
+                    </Link>
                   </li>
+                ))}
+              </ul>
+            </aside>
+            <div className='App-content'>
+              {modules.map((module) => (
+                <Route {...module.routeProps} key={module.name} />
               ))}
-            </ul>
-          </header>
-          <div className="App-content">
-            {modules.map(module => (
-              <Route {...module.routeProps} key={module.name} />
-            ))}
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      </Fragment>
     );
-
+  }
 }
-
-export default App;
