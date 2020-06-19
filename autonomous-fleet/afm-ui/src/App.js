@@ -53,27 +53,25 @@ export default class App extends Component {
                 />
               </div>
             </div>
-            <aside id='content'>
-              <ul className='App-nav'>
-                {modules.map((
-                  module // with a name, and routes
-                ) => (
-                  <li
-                    key={module.name}
-                    className={
-                      this.state.currentTab === module.name ? 'active' : ''
-                    }
+            {/* <ul className='App-nav'>
+              {modules.map((
+                module // with a name, and routes
+              ) => (
+                <li
+                  key={module.name}
+                  className={
+                    this.state.currentTab === module.name ? 'active' : ''
+                  }
+                >
+                  <Link
+                    to={module.routeProps.path}
+                    onClick={() => this.setState({ currentTab: module.name })}
                   >
-                    <Link
-                      to={module.routeProps.path}
-                      onClick={() => this.setState({ currentTab: module.name })}
-                    >
-                      {module.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </aside>
+                    {module.name}
+                  </Link>
+                </li>
+              ))}
+            </ul> */}
             <div className='App-content'>
               {modules.map((module) => (
                 <Route {...module.routeProps} key={module.name} />
