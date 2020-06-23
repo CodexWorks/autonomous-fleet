@@ -7,12 +7,17 @@ class MainContent extends React.Component {
   };
 
   componentDidMount() {
-    axios.get('http://127.0.0.1:8000/api/1').then((res) => {
-      this.setState({
-        text: res.data,
+    axios
+      .get('http://127.0.0.1:8000/api/1')
+      .then((res) => {
+        this.setState({
+          text: res.data,
+        });
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log('get err ' + error);
       });
-      console.log(res.data);
-    });
   }
 
   render() {
