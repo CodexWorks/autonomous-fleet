@@ -8,7 +8,6 @@ import {
   MdPortrait,
   MdMyLocation,
 } from 'react-icons/md';
-import { FaWarehouse } from 'react-icons/fa';
 import logo from '../imgs/logo_afm.svg';
 
 class SideNavbarMenu extends React.Component {

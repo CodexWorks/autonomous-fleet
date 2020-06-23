@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import modules from './modules';
 import MainNavbarMenu from './components/MainNavbarMenu';
 import SideNavbarMenu from './components/SideNavbarMenu';
 import './css/App.css';
 import './js/main.js';
+import MainContent from './components/MainContent';
 
 export default class App extends Component {
   constructor() {
@@ -43,7 +44,7 @@ export default class App extends Component {
       <Fragment>
         <Router>
           <div className='App'>
-            <header className='App-header'></header>
+            {/* <header className='App-header'></header> */}
             <div className='wrapper'>
               <SideNavbarMenu />
               <div id='content'>
@@ -51,6 +52,7 @@ export default class App extends Component {
                   user={this.state.user}
                   onTestClick={this.test}
                 />
+                <MainContent />
               </div>
             </div>
             {/* <ul className='App-nav'>
