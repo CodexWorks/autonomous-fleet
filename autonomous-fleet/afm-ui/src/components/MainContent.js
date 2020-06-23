@@ -1,35 +1,14 @@
-import React, { Fragment } from 'react';
-import axios from 'axios';
+import React from 'react';
 
-class MainContent extends React.Component {
-  state = {
-    text: [],
-  };
-
-  componentDidMount() {
-    axios
-      .get('http://127.0.0.1:8000/api/1')
-      .then((res) => {
-        this.setState({
-          text: res.data,
-        });
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log('get err ' + error);
-      });
-  }
-
-  render() {
-    return (
-      <Fragment>
-        <h2>{this.state.text.headline}</h2>
-        <div className='line'></div>
-        <p>{this.state.text.body_text}</p>
-        <span>{this.state.text.pub_date}</span>
-      </Fragment>
-    );
-  }
-}
+const MainContent = ({ headline, body_text, pub_date }) => {
+  return (
+    <div className='mainContentStyle'>
+      <h2>{headline}</h2>
+      <p>{body_text}</p>
+      <span>Published on: {pub_date}</span>
+      <div className='line'></div>
+    </div>
+  );
+};
 
 export default MainContent;

@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class TextBox extends React.Component {
   state = {
@@ -6,6 +7,8 @@ class TextBox extends React.Component {
     body_text: '',
     pub_date: '',
   };
+  // this.handleHeadlineChange = this.handleHeadlineChange.bind(this);
+  // this.handleSubmit = this.handleHeadlineSubmit.bind(this);
 
   handleHeadlineChange = (event) => {
     this.setState({
@@ -23,10 +26,29 @@ class TextBox extends React.Component {
     });
   };
 
+  onClickSendToServer = () => {
+    let payload = {
+      headline: this.state.headline,
+      body_text: this.state.body_text,
+      pub_date: this.state.pub_date,
+    };
+    axios
+      .post('http://127.0.0.1:8000/api/', payload)
+      .then((res) => {
+        alert('Updated');
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log('onClickSendToServer err ' + error);
+        console.log(payload);
+      });
+  };
+
   render() {
     return (
       <div className='textBoxContainer'>
         <textarea
+          name='title'
           value={this.state.headline}
           onChange={this.handleHeadlineChange}
           cols={40}
@@ -34,6 +56,7 @@ class TextBox extends React.Component {
           placeholder='Insert headline here..'
         ></textarea>
         <textarea
+          name='body_text'
           value={this.state.body_text}
           onChange={this.handleBodyTextChange}
           cols={40}
@@ -41,13 +64,16 @@ class TextBox extends React.Component {
           placeholder='Insert text body here..'
         ></textarea>
         <textarea
+          name='pub_date'
           value={this.state.pub_date}
           onChange={this.handleAuthorChange}
           cols={20}
           rows={1}
-          placeholder='Insert author name here..'
+          placeholder='Insert date here..'
         ></textarea>
-        <button onClick={this.onClickSendToServer}>Send to DB</button>
+        <button type='submit' onClick={this.onClickSendToServer}>
+          Submit to DB
+        </button>
       </div>
     );
   }

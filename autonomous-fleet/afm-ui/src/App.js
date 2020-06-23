@@ -5,7 +5,7 @@ import MainNavbarMenu from './components/MainNavbarMenu';
 import SideNavbarMenu from './components/SideNavbarMenu';
 import './css/App.css';
 import './js/main.js';
-import MainContent from './components/MainContent';
+import MainContentContainer from './components/MainContentContainer';
 import TextBox from './components/TextBox';
 
 export default class App extends Component {
@@ -53,7 +53,9 @@ export default class App extends Component {
                   user={this.state.user}
                   onTestClick={this.test}
                 />
-                <MainContent />
+                <MainContentContainer />
+                <br />
+                <h2>Create an article:</h2>
                 <TextBox />
               </div>
             </div>
