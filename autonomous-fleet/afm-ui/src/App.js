@@ -6,6 +6,7 @@ import SideNavbarMenu from './components/SideNavbarMenu';
 import './css/App.css';
 import './js/main.js';
 import MainContent from './components/MainContent';
+import TextBox from './components/TextBox';
 
 export default class App extends Component {
   constructor() {
@@ -53,6 +54,7 @@ export default class App extends Component {
                   onTestClick={this.test}
                 />
                 <MainContent />
+                <TextBox />
               </div>
             </div>
             {/* <ul className='App-nav'>

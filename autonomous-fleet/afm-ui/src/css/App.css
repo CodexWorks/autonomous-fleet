@@ -213,6 +213,21 @@ a.article:hover {
     margin: auto 20px;
 }
 
+.textBoxContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.textBoxContainer textarea {
+    margin: 10px 0;
+}
+
+.textBoxContainer button {
+    margin: 20px 0;
+    padding: 10px 0;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
