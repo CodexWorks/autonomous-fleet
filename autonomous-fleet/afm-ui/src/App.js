@@ -16,6 +16,7 @@ export default class App extends Component {
       currentTab: 'dashboard',
       isLoggedIn: false,
       user: null,
+      // userRole: client || supplier
     };
 
     // this.handleLogin = this.handleLogin.bind(this);
@@ -50,8 +51,8 @@ export default class App extends Component {
               <SideNavbarMenu />
               <div id='content'>
                 <MainNavbarMenu
-                  user={this.state.user}
-                  onTestClick={this.test}
+                // user={this.state.userRole}
+                // onTestClick={this.test}
                 />
                 <MainContentContainer />
                 <br />

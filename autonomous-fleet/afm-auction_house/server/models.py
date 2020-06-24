@@ -6,3 +6,7 @@ class Text(models.Model):
 
     def __str__(self):
         return self.headline
+
+class Orders(models.Model):
+    pass
+# new || assigned || active || completed
