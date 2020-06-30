@@ -1,14 +1,33 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const SideNavbarMenuItem = ({ primaryText, route, icon, active }) => {
-  return (
-    <li className={`${active ? 'active' : ''}`}>
-      <a href={route}>
-        <i className={icon} />
-        <span>{primaryText}</span>
-      </a>
-    </li>
-  );
-};
+export default class SideNavbarMenuItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      primaryText: props.primaryText,
+      route: props.route,
+      icon: props.icon,
+      active: props.active,
+    };
+  }
 
-export default SideNavbarMenuItem;
+  render() {
+    return (
+      <li>
+        <NavLink
+          to={this.state.route}
+          activeClassName='active'
+          activeStyle={{
+            fontWeight: 'bold',
+            background: '#6d7fcc',
+          }}
+        >
+          <i className={this.state.icon} />
+          <span>{this.state.primaryText}</span>
+        </NavLink>
+      </li>
+    );
+  }
+}
+// export default SideNavbarMenuItem; className={`${this.state.active ? 'active' : ''}`

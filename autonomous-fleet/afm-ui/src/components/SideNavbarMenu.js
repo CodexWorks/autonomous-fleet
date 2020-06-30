@@ -1,15 +1,6 @@
 import React from 'react';
-import {
-  MdDashboard,
-  MdGavel,
-  MdContentPaste,
-  MdAccountBalance,
-  MdAddShoppingCart,
-  MdPortrait,
-  MdMyLocation,
-} from 'react-icons/md';
-import logo from '../../imgs/logo_afm.svg';
-import SideNavbarMenuItem from './SideNavbarMenuItem';
+import logo from '../imgs/logo_afm.svg';
+import SideNavbarMenuItem from './side-navbar-menu/SideNavbarMenuItem';
 
 export default class SideNavbarMenu extends React.Component {
   constructor(props) {
@@ -26,6 +17,7 @@ export default class SideNavbarMenu extends React.Component {
         primaryText={item.text}
         route={item.route}
         icon={item.icon}
+        active={item.active}
       />
     ));
     return (

@@ -2,18 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import modules from './modules';
 import MainNavbarMenu from './components/MainNavbarMenu';
-import SideNavbarMenu from './components/side-navbar-menu/SideNavbarMenu';
+import SideNavbarMenu from './components/SideNavbarMenu';
 import './css/App.css';
 import './js/main.js';
-import {
-  MdDashboard,
-  MdGavel,
-  MdContentPaste,
-  MdAccountBalance,
-  MdAddShoppingCart,
-  MdPortrait,
-  MdMyLocation,
-} from 'react-icons/md';
 import MainContentContainer from './components/MainContentContainer';
 import TextBox from './components/TextBox';
 
