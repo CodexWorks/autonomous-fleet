@@ -1,12 +1,23 @@
 from django.db import models
-class Text(models.Model):
-    headline = models.CharField(max_length=100, blank=True, null=True)
-    body_text = models.TextField(blank=True, null=True)
-    pub_date = models.DateField('publishing date')
+
+import datetime
+
+class TransportOrder(models.Model):
+    transport_order_id = models.IntegerField(blank=True, null=True)
+    pickup_from = models.DateField(('pickup from date'), default=datetime.date.today)
+    pickup_until = models.DateField(('pickup until date'), default=datetime.date.today)
+    delivery_from = models.DateField(('delivery from date'), default=datetime.date.today)
+    delivery_until = models.DateField(('delivery until date'), default=datetime.date.today)
+    pickup_address_id = models.IntegerField(blank=True, null=True)
+    delivery_address_id = models.IntegerField(blank=True, null=True)
+    price = models.FloatField(blank=True, null=True)
+    currency = models.CharField(blank=True, null=True, max_length=3)
+    pallets = models.FloatField(blank=True, null=True)
+    weight = models.FloatField(blank=True, null=True)
+    volume = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        db_table = "transportorder"
 
     def __str__(self):
-        return self.headline
-
-class Orders(models.Model):
-    pass
-# new || assigned || active || completed
+        return str(self.transport_order_id)

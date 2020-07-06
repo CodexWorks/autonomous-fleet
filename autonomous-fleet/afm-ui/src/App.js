@@ -7,6 +7,7 @@ import './css/App.css';
 import './js/main.js';
 import MainContentContainer from './components/MainContentContainer';
 import TextBox from './components/TextBox';
+import CurrentOrdersContainer from './components/main-content/dashboard/client/CurrentOrdersContainer';
 
 export default class App extends Component {
   constructor() {
@@ -68,12 +69,17 @@ export default class App extends Component {
             {/* <header className='App-header'></header> */}
             <div className='wrapper'>
               <SideNavbarMenu items={this.state.sideNavbarMenuItems} />
+
               <div id='content'>
                 <MainNavbarMenu />
+
                 <MainContentContainer />
+
                 <br />
                 <h2>Create an article:</h2>
+
                 <TextBox />
+                <CurrentOrdersContainer />
               </div>
             </div>
             <div className='App-content'>

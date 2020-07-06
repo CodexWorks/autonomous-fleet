@@ -12,7 +12,7 @@ export default class CurrentOrdersContainer extends React.Component {
 
   componentDidMount() {
     axios
-      .get('http://127.0.0.1:8000/api/client/current-orders')
+      .get('http://127.0.0.1:8000/api')
       .then((res) => {
         this.setState({
           currentOrders: res.data,
@@ -29,8 +29,8 @@ export default class CurrentOrdersContainer extends React.Component {
     return <CurrentOrdersList currentOrders={filteredCurrentOrders} />;
   }
 
-  getFilteredTexts() {
+  getCurrentOrders() {
     const { currentOrders } = this.state;
-    return currentOrders.filter((order) => order.order_id);
+    return currentOrders.filter((order) => order.transport_order_id);
   }
 }

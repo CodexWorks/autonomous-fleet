@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-from server.models import Text
+from server.models import TransportOrder
 
-class TextSerializer(serializers.ModelSerializer):
+class TransportOrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Text
-        fields = ('headline', 'body_text', 'pub_date')
+        model = TransportOrder
+        fields = ('transport_order_id', 'pickup_from', 'pickup_until', 'delivery_from', 'delivery_until', 'pickup_address_id', 'delivery_address_id', 'price', 'currency', 'pallets', 'weight', 'volume')

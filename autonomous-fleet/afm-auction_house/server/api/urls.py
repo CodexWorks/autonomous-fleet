@@ -1,22 +1,6 @@
-from server.api.views import TextViewSet
+from server.api.views import TransportOrderViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'', TextViewSet, basename='texts')
+router.register(r'', TransportOrderViewSet, basename='transport_order')
 urlpatterns = router.urls
-
-
-# from django.urls import path
-
-# from .views import (
-#     TextListView,
-#     TextDetailView,
-#     TextCreateView,
-#     TextUpdateView)
-
-# urlpatterns = [
-#     path('', TextListView.as_view()),
-#     path('create/', TextCreateView.as_view()),
-#     path('<pk>/update/', TextUpdateView.as_view()),
-#     path('<pk>', TextDetailView.as_view())
-# ]

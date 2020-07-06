@@ -8,16 +8,13 @@ const CurrentOrdersList = ({ currentOrders }) => {
         return (
           <CurrentOrders
             key={i}
-            orderId={currentOrders[i].order_id}
+            orderId={currentOrders[i].transport_order_id}
             pickupFrom={currentOrders[i].pickup_from}
             pickupUntil={currentOrders[i].pickup_until}
             deliveryFrom={currentOrders[i].delivery_from}
             deliveryUntil={currentOrders[i].delivery_until}
             pickupAddressId={currentOrders[i].pickup_address_id}
             deliveryAddressId={currentOrders[i].delivery_address_id}
-            status={currentOrders[i].status}
-            customerId={currentOrders[i].customer_id}
-            supplierId={currentOrders[i].supplier_id}
             price={currentOrders[i].price}
             currency={currentOrders[i].currency}
             pallets={currentOrders[i].pallets}
