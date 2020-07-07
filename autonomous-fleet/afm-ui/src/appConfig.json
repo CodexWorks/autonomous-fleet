@@ -1,0 +1,39 @@
+{
+  "routes": [
+    {
+      "route": "/dashboard",
+      "text": "Dashboard",
+      "icon": "fa fa-tachometer fa-2x"
+    },
+    {
+      "route": "/auction-house",
+      "text": "Auction House",
+      "icon": "fa fa-gavel fa-2x"
+    },
+    {
+      "route": "/warehouse-management",
+      "text": "Warehouse Management",
+      "icon": "fa fa-industry fa-2x"
+    },
+    {
+      "route": "/accounting",
+      "text": "Accounting",
+      "icon": "fa fa-university fa-2x"
+    },
+    {
+      "route": "/vendor-management",
+      "text": "Vendor Management",
+      "icon": "fa fa-shopping-basket fa-2x"
+    },
+    {
+      "route": "/client-management",
+      "text": "Client Management",
+      "icon": "fa fa-id-card-o fa-2x"
+    },
+    {
+      "route": "/active-tracking",
+      "text": "Active Tracking",
+      "icon": "fa fa-truck fa-2x"
+    }
+  ]
+}

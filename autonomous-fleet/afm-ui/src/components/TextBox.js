@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import axios from 'axios';
 
 class TextBox extends React.Component {
@@ -46,35 +46,39 @@ class TextBox extends React.Component {
 
   render() {
     return (
-      <div className='textBoxContainer'>
-        <textarea
-          name='title'
-          value={this.state.headline}
-          onChange={this.handleHeadlineChange}
-          cols={40}
-          rows={1}
-          placeholder='Insert headline here..'
-        ></textarea>
-        <textarea
-          name='body_text'
-          value={this.state.body_text}
-          onChange={this.handleBodyTextChange}
-          cols={40}
-          rows={10}
-          placeholder='Insert text body here..'
-        ></textarea>
-        <textarea
-          name='pub_date'
-          value={this.state.pub_date}
-          onChange={this.handleAuthorChange}
-          cols={20}
-          rows={1}
-          placeholder='Insert date here..'
-        ></textarea>
-        <button type='submit' onClick={this.onClickSendToServer}>
-          Submit to DB
-        </button>
-      </div>
+      <Fragment>
+        <br />
+        <h2>Create an article:</h2>
+        <div className='textBoxContainer'>
+          <textarea
+            name='title'
+            value={this.state.headline}
+            onChange={this.handleHeadlineChange}
+            cols={40}
+            rows={1}
+            placeholder='Insert headline here..'
+          ></textarea>
+          <textarea
+            name='body_text'
+            value={this.state.body_text}
+            onChange={this.handleBodyTextChange}
+            cols={40}
+            rows={10}
+            placeholder='Insert text body here..'
+          ></textarea>
+          <textarea
+            name='pub_date'
+            value={this.state.pub_date}
+            onChange={this.handleAuthorChange}
+            cols={20}
+            rows={1}
+            placeholder='Insert date here..'
+          ></textarea>
+          <button type='submit' onClick={this.onClickSendToServer}>
+            Submit to DB
+          </button>
+        </div>
+      </Fragment>
     );
   }
 }
