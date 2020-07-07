@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 import CurrentOrdersContainer from './dashboard/client/CurrentOrdersContainer';
 
+/** Unfinished component, to be continued after auth is implemented */
+
+// ############### Constructor ###############
 export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -9,6 +12,8 @@ export default class Dashboard extends React.Component {
       current_orders: res.data,
     };
   }
+
+  // ############# RENDER ###########
   render() {
     let dashboard;
     if (this.state.userRole === client) {

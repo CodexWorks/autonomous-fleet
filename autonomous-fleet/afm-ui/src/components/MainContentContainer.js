@@ -2,6 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import MainContentList from './MainContentList';
 
+/** This component was used for example and learning purposes, not part of AFM functionality */
+
+// ############### Constructor ###############
 class MainContentContainer extends React.Component {
   constructor() {
     super();
@@ -10,6 +13,7 @@ class MainContentContainer extends React.Component {
     };
   }
 
+  // ############### Lifecycle ###############
   componentDidMount() {
     axios
       .get('http://127.0.0.1:8000/api/')
@@ -24,11 +28,13 @@ class MainContentContainer extends React.Component {
       });
   }
 
+  // ############# RENDER ###########
   render() {
     const filteredTexts = this.getFilteredTexts();
     return <MainContentList posts={filteredTexts} />;
   }
 
+  // ############### Event Handlers ###############
   getFilteredTexts() {
     const { posts } = this.state;
     return posts.filter((text) => text.headline);

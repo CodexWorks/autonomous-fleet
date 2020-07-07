@@ -10,6 +10,7 @@ import TextBox from './components/TextBox';
 import CurrentOrdersContainer from './components/main-content/dashboard/client/CurrentOrdersContainer';
 import appConfig from './appConfig';
 
+// ############### Constructor ###############
 export default class Main extends Component {
   constructor() {
     super();
@@ -22,6 +23,7 @@ export default class Main extends Component {
     };
   }
 
+  // ############# RENDER ###########
   render() {
     return (
       <Router>
@@ -35,6 +37,7 @@ export default class Main extends Component {
               <MainContentContainer />
 
               <TextBox />
+
               <CurrentOrdersContainer />
             </div>
           </div>

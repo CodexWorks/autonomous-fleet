@@ -1,31 +1,40 @@
 import React, { Fragment } from 'react';
 import axios from 'axios';
 
+/* This component was used for example purposes, not part of AFM functionality */
+
+// ############### Constructor ###############
 class TextBox extends React.Component {
   state = {
     headline: '',
     body_text: '',
     pub_date: '',
   };
-  // this.handleHeadlineChange = this.handleHeadlineChange.bind(this);
-  // this.handleSubmit = this.handleHeadlineSubmit.bind(this);
 
+  // ############### Event Handlers ###############
+
+  /** Headline field */
   handleHeadlineChange = (event) => {
     this.setState({
       headline: event.target.value,
     });
   };
+
+  /** Body text field */
   handleBodyTextChange = (event) => {
     this.setState({
       body_text: event.target.value,
     });
   };
+
+  /** Author field */
   handleAuthorChange = (event) => {
     this.setState({
       pub_date: event.target.value,
     });
   };
 
+  /** POST Headline, Body, and Author to DB */
   onClickSendToServer = () => {
     let payload = {
       headline: this.state.headline,
@@ -44,6 +53,7 @@ class TextBox extends React.Component {
       });
   };
 
+  // ############# RENDER ###########
   render() {
     return (
       <Fragment>

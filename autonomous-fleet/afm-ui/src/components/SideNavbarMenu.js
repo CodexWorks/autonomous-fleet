@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../imgs/logo_afm.svg';
 import SideNavbarMenuItem from './side-navbar-menu/SideNavbarMenuItem';
 
+// ############### Constructor ###############
 export default class SideNavbarMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -10,6 +11,7 @@ export default class SideNavbarMenu extends React.Component {
     };
   }
 
+  // ############# RENDER ###########
   render() {
     const itemsFragment = this.state.menuItems.map((item, i) => (
       <SideNavbarMenuItem

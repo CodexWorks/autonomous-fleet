@@ -1,20 +1,19 @@
 import React, { Fragment } from 'react';
 import { MdMenu } from 'react-icons/md';
 
+// ############### Constructor ###############
 class MainNavbarMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: props.user,
     };
-
-    // leaga contextul din MainNavbarMenu la referinta metodei test() din app.js
-    // this.onTestClick = props.onTestClick.bind(this);
   }
 
+  // ############# RENDER ###########
   render() {
     let mainNavbarMenu;
-    // console.log(this.state.user);
+    // an attempt at conditionally rendering login btns accordint to user role
     if (this.state.user) {
       mainNavbarMenu = (
         <Fragment>
@@ -72,14 +71,9 @@ class MainNavbarMenu extends React.Component {
             <MdMenu />
           </button>
 
-          {/* butoane dreapta-sus */}
+          {/* upper-right corner btns */}
           <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-            <ul className='nav navbar-nav ml-auto'>
-              {/* <li>
-                <button onClick={this.onTestClick}>TEST</button>
-              </li> */}
-              {mainNavbarMenu}
-            </ul>
+            <ul className='nav navbar-nav ml-auto'>{mainNavbarMenu}</ul>
           </div>
         </div>
       </nav>

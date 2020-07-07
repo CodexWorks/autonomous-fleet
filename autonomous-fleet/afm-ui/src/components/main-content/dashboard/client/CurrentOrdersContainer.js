@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import CurrentOrdersList from './micro-components/CurrentOrdersList';
 
+// ############### Constructor ###############
 export default class CurrentOrdersContainer extends React.Component {
   constructor() {
     super();
@@ -9,6 +10,8 @@ export default class CurrentOrdersContainer extends React.Component {
       currentOrders: [],
     };
   }
+
+  // ############### Lifecycle ###############
 
   componentDidMount() {
     axios
@@ -24,10 +27,14 @@ export default class CurrentOrdersContainer extends React.Component {
       });
   }
 
+  // ############# RENDER ###########
+
   render() {
     const filteredCurrentOrders = this.getCurrentOrders();
     return <CurrentOrdersList currentOrders={filteredCurrentOrders} />;
   }
+
+  // ############### Event Handlers ###############
 
   getCurrentOrders() {
     const { currentOrders } = this.state;

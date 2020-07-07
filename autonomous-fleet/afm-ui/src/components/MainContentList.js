@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react';
 import MainContent from './MainContent';
 
+/** This component was used for example purposes, not part of AFM functionality */
+
 const MainContentList = ({ posts }) => {
   return (
     <Fragment>
+      {/* parsing current order array returned by GET method */}
       {posts.map((text, i) => {
         return (
           <MainContent

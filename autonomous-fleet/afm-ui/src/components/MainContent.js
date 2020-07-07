@@ -1,5 +1,7 @@
 import React from 'react';
 
+/** This component was used for example purposes, not part of AFM functionality */
+
 const MainContent = ({ headline, body_text, pub_date }) => {
   return (
     <div className='mainContentStyle'>

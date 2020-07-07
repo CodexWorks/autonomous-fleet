@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react';
 
-// new || assigned || active || completed || canceled
-
 const CurrentOrders = (props) => {
+  // Parsing props keys nad returning key & value for each one
   return Object.keys(props).map((key) => {
     return (
       <p>

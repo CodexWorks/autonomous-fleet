@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+// ############### Constructor ###############
 export default class SideNavbarMenuItem extends React.Component {
   constructor(props) {
     super(props);
@@ -12,6 +13,7 @@ export default class SideNavbarMenuItem extends React.Component {
     };
   }
 
+  // ############# RENDER ###########
   render() {
     return (
       <li>
@@ -23,11 +25,10 @@ export default class SideNavbarMenuItem extends React.Component {
             background: '#6d7fcc',
           }}
         >
-          <i className={this.state.icon} />
+          <i className={this.state.icon} /> {/* sets font awesome icon class */}
           <span>{this.state.primaryText}</span>
         </NavLink>
       </li>
     );
   }
 }
-// export default SideNavbarMenuItem; className={`${this.state.active ? 'active' : ''}`

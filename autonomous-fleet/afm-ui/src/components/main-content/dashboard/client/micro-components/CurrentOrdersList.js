@@ -4,6 +4,7 @@ import CurrentOrders from './CurrentOrders';
 const CurrentOrdersList = ({ currentOrders }) => {
   return (
     <Fragment>
+      {/* parsing current order array returned by GET method */}
       {currentOrders.map((text, i) => {
         return (
           <CurrentOrders
