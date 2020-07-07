@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import MainContentList from './MainContentList';
 
-/** This component was used for example and learning purposes, not part of AFM functionality */
+/* This component was used for example and learning purposes, not part of AFM functionality */
 
 // ############### Constructor ###############
 class MainContentContainer extends React.Component {

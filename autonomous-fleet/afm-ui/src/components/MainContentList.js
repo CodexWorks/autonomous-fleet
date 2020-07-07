@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import MainContent from './MainContent';
 
-/** This component was used for example purposes, not part of AFM functionality */
+/* This component was used for example purposes, not part of AFM functionality */
 
 const MainContentList = ({ posts }) => {
   return (
