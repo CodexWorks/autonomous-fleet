@@ -1,5 +1,3 @@
 import AuctionHouse from './auction_house';
 
-export default [
-    AuctionHouse
-];
+export default [AuctionHouse];
