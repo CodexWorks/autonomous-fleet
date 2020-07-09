@@ -22,9 +22,10 @@ export const authFail = (error) => {
 };
 
 /**
- * Function that removes user's credetials  as part of the logout process
+ * Function that removes user's credetials as part of the logout process
+ * @reduxActionCreator AUTH_LOGOUT
  */
-export const authLogout = () => {
+export const logout = () => {
   localStorage.removeItem('user');
   localStorage.removeItem('expirationDate');
   return {
@@ -40,7 +41,7 @@ export const authLogout = () => {
 export const checkAuthTimeout = (expirationTime) => {
   return (dispatch) => {
     setTimeout(() => {
-      dispatch(authLogout());
+      dispatch(logout());
     }, expirationTime * 1000); //multiply miliseconds by 1000
   };
 };
@@ -60,6 +61,9 @@ export const authLogin = (username, password) => {
         localStorage.setItem('expirationDate', expirationDate); // sets expiration date in browser local memory
         dispatch(authSuccess(token));
         dispatch(checkAuthTimeout(3600)); // 1 hour
+      })
+      .catch((error) => {
+        dispatch(authFail(error));
       });
   };
 };
