@@ -22,6 +22,17 @@ export const authFail = (error) => {
 };
 
 /**
+ * Function that removes user's credetials  as part of the logout process
+ */
+export const authLogout = () => {
+  localStorage.removeItem('user');
+  localStorage.removeItem('expirationDate');
+  return {
+    type: actionTypes.AUTH_LOGOUT,
+  };
+};
+
+/**
  * Function that checks the authentication and logs the user out after a given amount of seconds
  * @param {number} expirationTime The number of seconds the logout will occur after checking the authentication
  * @returns {Function}
@@ -29,7 +40,7 @@ export const authFail = (error) => {
 export const checkAuthTimeout = (expirationTime) => {
   return (dispatch) => {
     setTimeout(() => {
-      dispatch(logout());
+      dispatch(authLogout());
     }, expirationTime * 1000); //multiply miliseconds by 1000
   };
 };
@@ -50,11 +61,5 @@ export const authLogin = (username, password) => {
         dispatch(authSuccess(token));
         dispatch(checkAuthTimeout(3600)); // 1 hour
       });
-  };
-};
-
-export const authLogout = () => {
-  return {
-    type: actionTypes.AUTH_LOGOUT,
   };
 };
