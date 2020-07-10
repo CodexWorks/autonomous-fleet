@@ -26,7 +26,7 @@ const authStart = (state, action) => {
 };
 
 /**
- * Function that sets lerror as null and loading as false, makes spinner dissapear, attaches token to the new vDOM object.
+ * Function that sets error as null and loading as false, makes spinner dissapear, attaches token to the new vDOM object.
  * @param {Object} state The current state.
  * @param {any} action The redux action which drives the reduction process.
  * @returns {Object} The resulting state after reduction.
@@ -65,7 +65,7 @@ const authLogout = (state, action) => {
 };
 
 /**
- * Reducer function that is responsible for state changes.
+ * Reducer function that is responsible for state changes. Reducer takes in all the actions, determines what the type of the action is, looks at what method it needs to execute, depending on the type of action received.
  * @param {Object} state The current state, defaulted to the initial vDOM object.
  * @param {any} action The redux action which drives the reduction process.
  * @returns {Object} The resulting state after reduction.
