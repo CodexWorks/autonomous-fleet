@@ -1,5 +1,5 @@
-from django.http import HttpResponse
+# from django.http import HttpResponse
 
 
-def get_text(request):
-    return HttpResponse("Test text." )
+# def get_text(request):
+#     return HttpResponse("Test text." )

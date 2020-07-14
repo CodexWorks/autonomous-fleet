@@ -22,6 +22,10 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('server.api.urls')),
-    path('auction_house/', views.get_text)
+    path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls'))
+    
+    # path('auction_house/', views.get_text)
+
 ]
 
