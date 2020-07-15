@@ -8,7 +8,7 @@ from http import HTTPStatus
 FAILED = "Test failed, response: "
 KEY_LENGTH = 40
 
-class SimpleTest(TestCase):
+class LoginTest(TestCase):
 
     def setUp(self):
         """
@@ -44,6 +44,4 @@ class SimpleTest(TestCase):
         # Asert
         self.assertEqual(response.status_code, HTTPStatus.BAD_REQUEST, FAILED + repr(response.content))
         self.assertFalse('key' in response.json(), FAILED + repr(response.content))
-
-
 

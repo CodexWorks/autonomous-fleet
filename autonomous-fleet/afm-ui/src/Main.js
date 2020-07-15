@@ -36,7 +36,7 @@ export default class Main extends Component {
 
               <MainContentContainer />
 
-              <TextBox />
+              <TextBox {...this.props} />
 
               <CurrentOrdersContainer />
             </div>

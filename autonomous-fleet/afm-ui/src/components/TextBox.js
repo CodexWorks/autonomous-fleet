@@ -87,6 +87,9 @@ class TextBox extends React.Component {
           <button type='submit' onClick={this.onClickSendToServer}>
             Submit to DB
           </button>
+
+          <button>HELLO</button>
+
         </div>
       </Fragment>
     );
