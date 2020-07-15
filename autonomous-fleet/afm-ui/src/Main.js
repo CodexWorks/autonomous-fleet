@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import modules from './modules';
 import MainNavbarMenu from './components/MainNavbarMenu';
 import SideNavbarMenu from './components/SideNavbarMenu';
 import './css/App.css';
 import './js/main.js';
 import MainContentContainer from './components/MainContentContainer';
-import TextBox from './components/TextBox';
 import CurrentOrdersContainer from './components/main-content/dashboard/client/CurrentOrdersContainer';
 import appConfig from './appConfig';
 
+import LandingPage from './components/LandingPage';
+
 // ############### Constructor ###############
 export default class Main extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       sideNavbarMenuItems: appConfig.routes,
@@ -28,15 +29,14 @@ export default class Main extends Component {
     return (
       <Router>
         <div className='App'>
-          <div className='wrapper'>
+          <LandingPage />
+          {/* <div className='wrapper'>
             <SideNavbarMenu items={this.state.sideNavbarMenuItems} />
-
+            <div>{this.props.isAuthenticated}</div>
             <div id='content'>
               <MainNavbarMenu />
 
               <MainContentContainer />
-
-              <TextBox {...this.props} />
 
               <CurrentOrdersContainer />
             </div>
@@ -45,7 +45,7 @@ export default class Main extends Component {
             {modules.map((module) => (
               <Route {...module.routeProps} key={module.name} />
             ))}
-          </div>
+          </div> */}
         </div>
       </Router>
     );

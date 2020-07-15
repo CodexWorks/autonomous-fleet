@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Main from './Main';
 import { connect } from 'react-redux';
+import Main from './Main';
 
 class App extends Component {
   render() {
@@ -8,10 +8,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.token !== null
-  } 
-}
+    isAuthenticated: state.token !== null,
+  };
+};
 
 export default connect(mapStateToProps)(App);

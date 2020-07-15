@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 const CurrentOrders = (props) => {
   // Parsing props keys nad returning key & value for each one

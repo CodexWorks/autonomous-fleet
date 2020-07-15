@@ -1,0 +1,94 @@
+import React, { Component } from 'react';
+import axios from 'axios';
+
+export default class Login extends Component {
+  state = {
+    username: '',
+    password: '',
+  };
+
+  // ############### Event Handlers ###############
+
+  /** Username field */
+  handleUsernameChange = (event) => {
+    this.setState({
+      username: event.target.value,
+    });
+  };
+
+  /** Password field */
+  handlePasswordChange = (event) => {
+    this.setState({
+      password: event.target.value,
+    });
+  };
+
+  onClickSendLoginData = () => {
+    axios
+      .post('http://127.0.0.1:8000/rest-auth/login/', {
+        username: this.state.username,
+        password: this.state.password,
+      })
+      .then((res) => {
+        const token = res.data.key;
+        localStorage.setItem('token', token); // sets token in browser local memory
+      })
+      .catch((error) => {
+        console.log('POST user login error ' + error);
+      });
+  };
+
+  render() {
+    return (
+      <form>
+        <h3>Sign In</h3>
+
+        <div className='form-group'>
+          <label>Username</label>
+          <input
+            value={this.state.username}
+            onChange={this.handleUsernameChange}
+            type='username'
+            className='form-control'
+            placeholder='Enter username'
+          />
+        </div>
+
+        <div className='form-group'>
+          <label>Password</label>
+          <input
+            value={this.state.password}
+            onChange={this.handlePasswordChange}
+            type='password'
+            className='form-control'
+            placeholder='Enter password'
+          />
+        </div>
+
+        <div className='form-group'>
+          <div className='custom-control custom-checkbox'>
+            <input
+              type='checkbox'
+              className='custom-control-input'
+              id='customCheck1'
+            />
+            <label className='custom-control-label' htmlFor='customCheck1'>
+              Remember me
+            </label>
+          </div>
+        </div>
+
+        <button
+          type='submit'
+          className='btn btn-primary btn-block'
+          onClick={this.onClickSendLoginData}
+        >
+          Submit
+        </button>
+        <p className='forgot-password text-right'>
+          Forgot <a href='#'>password?</a>
+        </p>
+      </form>
+    );
+  }
+}
