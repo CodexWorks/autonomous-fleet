@@ -72,6 +72,24 @@ class MainNavbarMenu extends React.Component {
               <span>REGISTER</span>
             </NavLink>
           </li>
+          {/* Temporary log out button */}
+          <li className='nav-item'>
+            <NavLink
+              to='/sign-in'
+              className='nav-link'
+              onClick = { () =>{
+                localStorage.removeItem('token');
+                window.location.reload(false);
+              }
+              }
+              activeStyle={{
+                fontWeight: 'bold',
+              }}
+            >
+              <span>LOGOUT</span>
+            </NavLink>
+          </li>
+          {/* ------------------------- */}
         </Fragment>
       );
     }

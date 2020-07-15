@@ -9,6 +9,7 @@ class TextBox extends React.Component {
     headline: '',
     body_text: '',
     pub_date: '',
+    orders: [],
   };
 
   // ############### Event Handlers ###############
@@ -53,6 +54,16 @@ class TextBox extends React.Component {
       });
   };
 
+  onClickShowOrders = () =>{
+    axios
+      .get('http://127.0.0.1:8000/api/')
+      .then((res) => {
+        this.setState({
+          orders: res.data
+        });
+      })
+  }
+
   // ############# RENDER ###########
   render() {
     return (
@@ -87,9 +98,12 @@ class TextBox extends React.Component {
           <button type='submit' onClick={this.onClickSendToServer}>
             Submit to DB
           </button>
-
-          <button>HELLO</button>
-
+          <button onClick={() => {
+              this.onClickShowOrders();
+              
+          }}>
+            Show orders
+          </button>
         </div>
       </Fragment>
     );

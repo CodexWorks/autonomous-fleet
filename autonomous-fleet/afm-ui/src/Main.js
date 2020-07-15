@@ -10,6 +10,7 @@ import CurrentOrdersContainer from './components/main-content/dashboard/client/C
 import appConfig from './appConfig';
 
 import LandingPage from './components/LandingPage';
+import TextBox from './components/TextBox';
 
 // ############### Constructor ###############
 export default class Main extends Component {
@@ -28,9 +29,13 @@ export default class Main extends Component {
   render() {
     return (
       <Router>
+        {console.log(localStorage.getItem('token'))}
         <div className='App'>
-          <LandingPage />
-          {/* <div className='wrapper'>
+          {localStorage.getItem('token') === null 
+          ?
+            <LandingPage />
+          :<div>
+           <div className='wrapper'>
             <SideNavbarMenu items={this.state.sideNavbarMenuItems} />
             <div>{this.props.isAuthenticated}</div>
             <div id='content'>
@@ -45,7 +50,9 @@ export default class Main extends Component {
             {modules.map((module) => (
               <Route {...module.routeProps} key={module.name} />
             ))}
-          </div> */}
+          </div> 
+          </div>
+          }
         </div>
       </Router>
     );

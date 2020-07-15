@@ -8,6 +8,7 @@ export default class CurrentOrdersContainer extends React.Component {
     super();
     this.state = {
       currentOrders: [],
+      isShowing: false,
     };
   }
 
@@ -27,11 +28,26 @@ export default class CurrentOrdersContainer extends React.Component {
       });
   }
 
+  onClick = () => {
+    this.setState({
+      isShowing: !this.state.isShowing
+    });
+  }
+
   // ############# RENDER ###########
 
   render() {
     const filteredCurrentOrders = this.getCurrentOrders();
-    return <CurrentOrdersList currentOrders={filteredCurrentOrders} />;
+    return (
+      <div>
+        <button onClick={this.onClick}>Show Orders</button>
+        {this.state.isShowing ? 
+          <CurrentOrdersList currentOrders={filteredCurrentOrders} />
+        :
+          null
+        }
+      </div>
+    );
   }
 
   // ############### Event Handlers ###############
