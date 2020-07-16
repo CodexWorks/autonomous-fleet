@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 export default class Login extends Component {
@@ -25,11 +25,15 @@ export default class Login extends Component {
   };
 
   handleChange = (event) => {
-    switch(event.target.name){
-      case 'username':this.setState({username: event.target.value,}); break;
-      case 'password': this.setState({password: event.target.value,}); break;
+    switch (event.target.name) {
+      case 'username':
+        this.setState({ username: event.target.value });
+        break;
+      case 'password':
+        this.setState({ password: event.target.value });
+        break;
     }
-  }
+  };
 
   onClickSendLoginData = () => {
     axios
@@ -60,6 +64,7 @@ export default class Login extends Component {
             name='username'
             className='form-control'
             placeholder='Enter username'
+            data-cy='login-username'
           />
         </div>
 
@@ -72,6 +77,7 @@ export default class Login extends Component {
             name='password'
             className='form-control'
             placeholder='Enter password'
+            data-cy='login-password'
           />
         </div>
 
@@ -92,6 +98,7 @@ export default class Login extends Component {
           type='submit'
           className='btn btn-primary btn-block'
           onClick={this.onClickSendLoginData}
+          data-cy='login-submit'
         >
           Submit
         </button>

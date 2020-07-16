@@ -27,7 +27,8 @@
     "test": "react-scripts test",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy:run": "cypress run"
   },
   "browserslist": {
     "production": [
@@ -42,6 +43,6 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^4.8.0"
+    "cypress": "^4.10.0"
   }
 }

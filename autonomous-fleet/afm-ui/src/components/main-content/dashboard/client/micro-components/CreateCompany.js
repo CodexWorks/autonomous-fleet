@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import CurrentOrdersList from './micro-components/CurrentOrdersList';
 
 // ############### Constructor ###############
 export default class CurrentOrdersContainer extends React.Component {
@@ -13,20 +12,25 @@ export default class CurrentOrdersContainer extends React.Component {
   }
 
   onClick = () => {
+    let payload = {
+      company_id: this.state.companyId,
+      vat_id: this.state.vatId,
+      is_supplier: this.state.isSupplier,
+      is_client: this.state.isCompany,
+      adress: this.state.adress,
+      country_id: this.state.countryId,
+      country: this.state.country,
+      registration_number: this.state.registrationNumber,
+      user: this.state.username,
+    };
     axios
-      .get('http://127.0.0.1:8000/api/transportorders')
+      .post('http://127.0.0.1:8000/api/company/', payload)
       .then((res) => {
-        this.setState({
-          currentOrders: res.data,
-        });
         console.log(res.data);
       })
       .catch((error) => {
-        console.log('get currentOrders err ' + error);
+        console.log('POST new company err ' + error);
       });
-    this.setState({
-      isShowing: !this.state.isShowing,
-    });
   };
 
   // ############# RENDER ###########

@@ -5,12 +5,12 @@ import MainNavbarMenu from './components/MainNavbarMenu';
 import SideNavbarMenu from './components/SideNavbarMenu';
 import './css/App.css';
 import './js/main.js';
-import MainContentContainer from './components/MainContentContainer';
+// import MainContentContainer from './components/MainContentContainer';
 import CurrentOrdersContainer from './components/main-content/dashboard/client/CurrentOrdersContainer';
 import appConfig from './appConfig';
 
 import LandingPage from './components/LandingPage';
-import TextBox from './components/TextBox';
+// import TextBox from './components/TextBox';
 
 // ############### Constructor ###############
 export default class Main extends Component {
@@ -31,28 +31,28 @@ export default class Main extends Component {
       <Router>
         {console.log(localStorage.getItem('token'))}
         <div className='App'>
-          {localStorage.getItem('token') === null 
-          ?
+          {localStorage.getItem('token') !== null ? (
             <LandingPage />
-          :<div>
-           <div className='wrapper'>
-            <SideNavbarMenu items={this.state.sideNavbarMenuItems} />
-            <div>{this.props.isAuthenticated}</div>
-            <div id='content'>
-              <MainNavbarMenu />
+          ) : (
+            <div>
+              <div className='wrapper'>
+                <SideNavbarMenu items={this.state.sideNavbarMenuItems} />
+                <div>{this.props.isAuthenticated}</div>
+                <div id='content'>
+                  <MainNavbarMenu />
 
-              <MainContentContainer />
+                  {/* <MainContentContainer /> */}
 
-              <CurrentOrdersContainer />
+                  <CurrentOrdersContainer />
+                </div>
+              </div>
+              <div className='App-content'>
+                {modules.map((module) => (
+                  <Route {...module.routeProps} key={module.name} />
+                ))}
+              </div>
             </div>
-          </div>
-          <div className='App-content'>
-            {modules.map((module) => (
-              <Route {...module.routeProps} key={module.name} />
-            ))}
-          </div> 
-          </div>
-          }
+          )}
         </div>
       </Router>
     );
