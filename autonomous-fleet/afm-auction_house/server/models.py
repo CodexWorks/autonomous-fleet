@@ -27,6 +27,7 @@ class TransportOrder(models.Model):
 class Company(models.Model):
     user = models.ManyToManyField(get_user_model())
     company_id = models.IntegerField(blank=True, null=True)
+    company_name =models.CharField(blank=True, null=True, max_length=255)
     vat_id = models.CharField(blank=True, null=True, max_length=150)
     is_supplier = models.BooleanField(blank=True, null=True)
     is_client = models.BooleanField(blank=True, null=True)

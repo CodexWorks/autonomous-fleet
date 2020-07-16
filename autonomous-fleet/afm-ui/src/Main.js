@@ -7,6 +7,7 @@ import './css/App.css';
 import './js/main.js';
 // import MainContentContainer from './components/MainContentContainer';
 import CurrentOrdersContainer from './components/main-content/dashboard/client/CurrentOrdersContainer';
+import CurrentCompaniesContainer from './components/main-content/dashboard/client/CurrentCompaniesContainer';
 import appConfig from './appConfig';
 
 import LandingPage from './components/LandingPage';
@@ -29,7 +30,6 @@ export default class Main extends Component {
   render() {
     return (
       <Router>
-        {console.log(localStorage.getItem('token'))}
         <div className='App'>
           {localStorage.getItem('token') !== null ? (
             <LandingPage />
@@ -42,6 +42,7 @@ export default class Main extends Component {
                   <MainNavbarMenu />
 
                   {/* <MainContentContainer /> */}
+                  <CurrentCompaniesContainer />
 
                   <CurrentOrdersContainer />
                 </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import CurrentOrdersList from './micro-components/CurrentOrdersList';
+import CreateCompany from './micro-components/CreateCompany'
 
 // ############### Constructor ###############
 export default class CurrentOrdersContainer extends React.Component {
@@ -35,7 +36,8 @@ export default class CurrentOrdersContainer extends React.Component {
     const filteredCurrentOrders = this.getCurrentOrders();
     return (
       <div>
-        <button data-cy='orders-btn' onClick={this.onClick}>
+        <CreateCompany />
+        <button type="button" className="btn btn-dark" data-cy='orders-btn' onClick={this.onClick}>
           Show Orders
         </button>
         {this.state.isShowing ? (
