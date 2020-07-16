@@ -27,12 +27,19 @@ cd [local-repository]
 # **For back-end, carry out the following steps:**
 
 ## _Step 1:_
->create and start a a virtual environment:
+### Linux
 ```sh
 virtualenv env --no-site-packages
 ```
 ```
 source env/bin/activate
+```
+### Windows 
+```console
+py -m venv afm
+```
+```console
+afm\Scripts\activate.bat
 ```
 
 ## _Step 2:_
@@ -128,3 +135,12 @@ npm start
 
 ## _Step 5:_
 >open `localhost:3000` on your browser to view the app
+
+# Debugging
+If the following error arises: 
+
+`[WinError 10053] An established connection was aborted by the software in your host machine`
+> Run this command in cmd
+```console
+cmd.exe /c chcp 1252
+```
