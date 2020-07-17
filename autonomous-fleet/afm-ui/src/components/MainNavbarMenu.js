@@ -1,9 +1,72 @@
 import React from 'react';
-import { MdMenu } from 'react-icons/md';
+import { MdMenu, MdEnhancedEncryption } from 'react-icons/md';
 import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
+import axios from 'axios';
+
+import {withCookies, Cookies} from 'react-cookie'
+
 
 // ############### Constructor ###############
 class MainNavbarMenu extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const {cookies} = props;
+
+    this.state = {
+      user: [1],
+      companies: [],
+      selectedCompanyID: 0,
+      cookieValue: cookies.get('companyID'),
+    };
+  }
+
+  componentDidMount(){
+    axios
+      .get('http://127.0.0.1:8000/user_companies/', {
+        params: {
+          id: this.state.user[0],
+        },
+      })
+      .then((res) => {
+        const tempArray=[];
+        // Getting the name and id of the company and putting them in an array
+        res.data.map((item, index) =>
+          tempArray.push({[item.company_name]: item.id})
+        );
+
+        // Adding the array to the state
+        this.setState({
+          companies: tempArray
+        });
+        
+        if(!this.state.cookieValue){
+          //Obtaining the first company's ID if the cookie isn't valid
+          let firstID=Object.keys(tempArray[0]).map(key => tempArray[0][key])[0];
+          this.setState({
+            selectedCompanyID: firstID
+          });
+        }else{
+          // Show the value corresponding to the id from the cookie
+        }
+      })
+      .catch((error) => {
+        console.log('GET user companie error ' + error);
+      });
+  }
+
+  handleChange = (event) =>{
+    let selectedItem = this.state.companies[event.target.selectedIndex];
+    this.setState({
+      selectedCompanyID: selectedItem[event.target.value]
+    })
+    
+    // saving selected company id in cookie
+    const {cookies} = this.props;
+    cookies.set('companyID', this.state.selectedCompanyID);
+    this.setState({ cookieValue: this.state.selectedCompanyID });
+  }
+
   // ############# RENDER ###########
   render() {
     const { match, location, history } = this.props;
@@ -24,7 +87,7 @@ class MainNavbarMenu extends React.Component {
                   HI, USER!
                 </a>
               </li>
-              <li className='nav-item dropdown'>
+              {/* <li className='nav-item dropdown'>
                 <a
                   className='nav-link dropdown-toggle'
                   id='navbarDropdown'
@@ -44,6 +107,25 @@ class MainNavbarMenu extends React.Component {
                     Supplier
                   </a>
                 </div>
+              </li> */}
+              <li>
+                <select onChange={this.handleChange} className="form-control" disabled={this.state.companies.length === 0}
+                >
+                  {(this.state.companies.length === 0) ? 
+                    (<option style={{display: 'none'}}>No company found</option>)
+                    :
+                     (
+                      // Going through the array's values
+                      this.state.companies.map((item, index) => {
+                        return (
+                          // For each value an <option> tag is created with the item's name
+                          Object.keys(item).map((key, i) => {
+                            return <option selected={this.state.cookieValue === item[key]}>{key}</option>
+                          })
+                        );
+                    })
+                    )}
+                </select>
               </li>
               <li className='nav-item'>
                 <a className='nav-link' href='#'>
@@ -58,4 +140,4 @@ class MainNavbarMenu extends React.Component {
   }
 }
 
-export default withRouter(MainNavbarMenu);
+export default withCookies(MainNavbarMenu);

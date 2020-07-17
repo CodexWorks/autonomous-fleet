@@ -23,8 +23,11 @@ class Main extends Component {
       sideNavbarMenuItems: appConfig.routes,
       currentTab: 'dashboard',
       isLoggedIn: false,
-      user: null, // client || supplier
+      user: null, // client || supplie
     };
+  }
+
+  handleChange = (event) =>{
   }
 
   // ############# RENDER ###########
@@ -42,6 +45,7 @@ class Main extends Component {
                 <div>{this.props.isAuthenticated}</div>
                 <div id='content'>
                   <MainNavbarMenu />
+
 
                   <Route exact path='/transport-orders' component={Orders} />
                   <Route path='/companies' component={CreateCompany} />
