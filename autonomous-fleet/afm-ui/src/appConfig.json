@@ -21,13 +21,13 @@
       "icon": "fa fa-university fa-2x"
     },
     {
-      "route": "/vendor-management",
-      "text": "Vendor Management",
+      "route": "/transport-orders",
+      "text": "Orders",
       "icon": "fa fa-shopping-basket fa-2x"
     },
     {
-      "route": "/client-management",
-      "text": "Client Management",
+      "route": "/companies",
+      "text": "Companies",
       "icon": "fa fa-id-card-o fa-2x"
     },
     {

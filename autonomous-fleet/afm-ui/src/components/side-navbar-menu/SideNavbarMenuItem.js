@@ -15,6 +15,7 @@ export default class SideNavbarMenuItem extends React.Component {
 
   // ############# RENDER ###########
   render() {
+    let displayComponent = this.state.primaryText.split(' ').join('');
     return (
       <li>
         <NavLink

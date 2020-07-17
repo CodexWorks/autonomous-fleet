@@ -198,7 +198,7 @@ span {
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
+    color: #6d7fcc;
     background: #fff;
 }
 
@@ -210,6 +210,10 @@ span {
 a[aria-expanded="true"] {
     color: #fff;
     background: #6d7fcc;
+}
+
+#sidebar ul li a.active:hover {
+    color: #fff;
 }
 
 a[data-toggle="collapse"] {

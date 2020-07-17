@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
 import modules from './modules';
 import MainNavbarMenu from './components/MainNavbarMenu';
 import SideNavbarMenu from './components/SideNavbarMenu';
 import './css/App.css';
 import './js/main.js';
 // import MainContentContainer from './components/MainContentContainer';
-import CurrentOrdersContainer from './components/main-content/dashboard/client/CurrentOrdersContainer';
-import CurrentCompaniesContainer from './components/main-content/dashboard/client/CurrentCompaniesContainer';
+import Orders from './components/main-content/dashboard/client/Orders';
+import CurrentCompanies from './components/main-content/dashboard/client/CurrentCompanies';
+import CreateCompany from './components/main-content/dashboard/client/micro-components/CreateCompany';
 import appConfig from './appConfig';
 
 import LandingPage from './components/LandingPage';
 // import TextBox from './components/TextBox';
 
 // ############### Constructor ###############
-export default class Main extends Component {
+class Main extends Component {
   constructor(props) {
     super(props);
 
@@ -32,8 +33,9 @@ export default class Main extends Component {
       <Router>
         <div className='App'>
           {localStorage.getItem('token') !== null ? (
-            <LandingPage />
+            <Route path='/' component={LandingPage} />
           ) : (
+            // <LandingPage />
             <div>
               <div className='wrapper'>
                 <SideNavbarMenu items={this.state.sideNavbarMenuItems} />
@@ -41,10 +43,9 @@ export default class Main extends Component {
                 <div id='content'>
                   <MainNavbarMenu />
 
-                  {/* <MainContentContainer /> */}
-                  <CurrentCompaniesContainer />
-
-                  <CurrentOrdersContainer />
+                  <Route exact path='/transport-orders' component={Orders} />
+                  <Route path='/companies' component={CreateCompany} />
+                  <Route path='/companies' component={CurrentCompanies} />
                 </div>
               </div>
               <div className='App-content'>
@@ -59,3 +60,5 @@ export default class Main extends Component {
     );
   }
 }
+
+export default withRouter(Main);

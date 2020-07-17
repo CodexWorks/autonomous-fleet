@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 export default class Login extends Component {
@@ -31,6 +30,8 @@ export default class Login extends Component {
         break;
       case 'password':
         this.setState({ password: event.target.value });
+        break;
+      default:
         break;
     }
   };

@@ -34,13 +34,23 @@ export default class SignUp extends Component {
   };
 
   handleChange = (event) => {
-    switch(event.target.name){
-      case 'username':this.setState({username: event.target.value,}); break;
-      case 'email': this.setState({email: event.target.value,});
-      case 'password1': this.setState({password1: event.target.value,});
-      case 'password2': this.setState({password2: event.target.value,}); break;
+    switch (event.target.name) {
+      case 'username':
+        this.setState({ username: event.target.value });
+        break;
+      case 'email':
+        this.setState({ email: event.target.value });
+        break;
+      case 'password1':
+        this.setState({ password1: event.target.value });
+        break;
+      case 'password2':
+        this.setState({ password2: event.target.value });
+        break;
+      default:
+        break;
     }
-  }
+  };
 
   onClikSendRegisteringData = () => {
     axios
@@ -48,7 +58,7 @@ export default class SignUp extends Component {
         username: this.state.username,
         email: this.state.email,
         password1: this.state.password1,
-        password2: this.state.password2
+        password2: this.state.password2,
       })
       .then((res) => {
         const token = res.data.key;
@@ -57,7 +67,7 @@ export default class SignUp extends Component {
       .catch((error) => {
         console.log('POST user registration error ' + error);
       });
-  }
+  };
 
   render() {
     return (
@@ -108,8 +118,8 @@ export default class SignUp extends Component {
           />
         </div>
 
-        <button 
-          type='submit' 
+        <button
+          type='submit'
           className='btn btn-primary btn-block'
           onClick={this.onClikSendRegisteringData}
         >

@@ -1,99 +1,12 @@
-import React, { Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
 import { MdMenu } from 'react-icons/md';
+import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
 
 // ############### Constructor ###############
 class MainNavbarMenu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: props.user,
-    };
-  }
-
   // ############# RENDER ###########
   render() {
-    let mainNavbarMenu;
-    // an attempt at conditionally rendering login btns accordint to user role
-    if (this.state.user) {
-      mainNavbarMenu = (
-        <Fragment>
-          <li className='nav-item active'>
-            <a className='nav-link' href='#'>
-              <i className='fas fa-user-tie' />
-              HI, {this.state.user.name}!
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a className='nav-link' href='#'>
-              @ CODEX EXPRESS
-            </a>
-            <ul className='collapse list-unstyled'>
-              <li>
-                <a href='#'>CODEX EXPRESS RO</a>
-              </li>
-              <li>
-                <a href='#'>CODEX EXPRESS DE</a>
-              </li>
-              <li>
-                <a href='#'>CODEX EXPRESS UK</a>
-              </li>
-            </ul>
-          </li>
-          <li className='nav-item'>
-            <a className='nav-link' href='#'>
-              LOGOUT
-            </a>
-          </li>
-        </Fragment>
-      );
-    } else {
-      mainNavbarMenu = (
-        <Fragment>
-          <li className='nav-item'>
-            <NavLink
-              to='/login'
-              className='nav-link'
-              activeStyle={{
-                fontWeight: 'bold',
-              }}
-            >
-              <span>LOGIN</span>
-            </NavLink>
-          </li>
-          <li className='nav-item'>
-            <NavLink
-              to='/register'
-              className='nav-link'
-              activeStyle={{
-                fontWeight: 'bold',
-              }}
-            >
-              <span>REGISTER</span>
-            </NavLink>
-          </li>
-          {/* Temporary log out button */}
-          <li className='nav-item'>
-            <NavLink
-              to='/sign-in'
-              className='nav-link'
-              onClick = { () =>{
-                localStorage.removeItem('token');
-                window.location.reload(false);
-              }
-              }
-              activeStyle={{
-                fontWeight: 'bold',
-              }}
-            >
-              <span>LOGOUT</span>
-            </NavLink>
-          </li>
-          {/* ------------------------- */}
-        </Fragment>
-      );
-    }
-
+    const { match, location, history } = this.props;
     return (
       <nav className='navbar navbar-expand-lg navbar-light bg-light'>
         <div className='container-fluid'>
@@ -104,7 +17,40 @@ class MainNavbarMenu extends React.Component {
 
           {/* upper-right corner btns */}
           <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-            <ul className='nav navbar-nav ml-auto'>{mainNavbarMenu}</ul>
+            <ul className='nav navbar-nav ml-auto'>
+              <li className='nav-item active'>
+                <a className='nav-link' href='#'>
+                  <i className='fas fa-user-tie' />
+                  HI, USER!
+                </a>
+              </li>
+              <li className='nav-item dropdown'>
+                <a
+                  className='nav-link dropdown-toggle'
+                  id='navbarDropdown'
+                  role='button'
+                  data-toggle='dropdown'
+                  aria-haspopup='true'
+                  aria-expanded='false'
+                  href='#'
+                >
+                  Role
+                </a>
+                <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
+                  <NavLink className='dropdown-item' to='/client'>
+                    Client
+                  </NavLink>
+                  <a className='dropdown-item' href=''>
+                    Supplier
+                  </a>
+                </div>
+              </li>
+              <li className='nav-item'>
+                <a className='nav-link' href='#'>
+                  LOGOUT
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
@@ -112,4 +58,4 @@ class MainNavbarMenu extends React.Component {
   }
 }
 
-export default MainNavbarMenu;
+export default withRouter(MainNavbarMenu);

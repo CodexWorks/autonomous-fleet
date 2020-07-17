@@ -5,7 +5,6 @@ import logo from '../imgs/logo_afm.svg';
 
 import Login from './Login';
 import SignUp from './SignUp';
-import { MdCenterFocusStrong } from 'react-icons/md';
 
 export default class LandingPage extends Component {
   render() {
