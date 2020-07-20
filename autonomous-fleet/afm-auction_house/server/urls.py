@@ -26,7 +26,7 @@ urlpatterns = [
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
 
     path('user/', views.userInfo),
-    path('user_companies/', views.userCompanies)
+    path('user-companies/', views.userCompanies)
     # path('auction_house/', views.get_text)
 
 ]

@@ -1,8 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
-from server.models import TransportOrder
-from server.models import Company
+from server.models import TransportOrder, Company, Address, AuctionRoom
 
 class TransportOrderSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,3 +13,12 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = '__all__'
 
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Address
+        fields = '__all__'
+
+class AuctionRoomSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = AuctionRoom
+        fields = '__all__'

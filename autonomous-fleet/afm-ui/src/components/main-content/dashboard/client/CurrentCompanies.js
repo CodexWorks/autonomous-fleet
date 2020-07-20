@@ -13,7 +13,7 @@ export default class CurrentCompanies extends React.Component {
 
   componentDidMount() {
     axios
-      .get('http://127.0.0.1:8000/user_companies/', {
+      .get('http://127.0.0.1:8000/user-companies/', {
         params: {
           id: this.state.user[0],
         },

@@ -4,14 +4,11 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
 
-from server.models import TransportOrder
-from server.models import Company
+from server.models import TransportOrder, Company, Address, AuctionRoom
 from django.contrib.auth import get_user_model
-from .serializers import TransportOrderSerializer
-from .serializers import CompanySerializer
+from .serializers import TransportOrderSerializer, CompanySerializer, AddressSerializer, AuctionRoomSerializer
 
 import json
-from django.http import JsonResponse
 
 class TransportOrderViewSet(viewsets.ModelViewSet):
     serializer_class = TransportOrderSerializer
@@ -20,6 +17,14 @@ class TransportOrderViewSet(viewsets.ModelViewSet):
 class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = CompanySerializer
     queryset = Company.objects.all()
+
+class AddressViewSet(viewsets.ModelViewSet):
+    serializer_class = AddressSerializer
+    queryset = Address.objects.all()
+
+class AuctionRoomViewSet(viewsets.ModelViewSet):
+    serializer_class = AuctionRoomSerializer
+    queryset = AuctionRoom.objects.all()
 
 @api_view(('POST',))
 def userInfo(request):

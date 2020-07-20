@@ -14,7 +14,7 @@ export default class CurrentOrdersContainer extends React.Component {
 
   onClick = () => {
     axios
-      .get('http://127.0.0.1:8000/api/transportorders')
+      .get('http://127.0.0.1:8000/api/transport-order')
       .then((res) => {
         this.setState({
           currentOrders: res.data,

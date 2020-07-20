@@ -22,7 +22,7 @@ class MainNavbarMenu extends React.Component {
 
   componentDidMount(){
     axios
-      .get('http://127.0.0.1:8000/user_companies/', {
+      .get('http://127.0.0.1:8000/user-companies/', {
         params: {
           id: this.state.user[0],
         },
@@ -111,9 +111,6 @@ class MainNavbarMenu extends React.Component {
                   </a>
                 </div>
               </li> */}
-              <li>
-                {this.state.cookieValue}
-              </li>
               <li>
                 <select onChange={this.handleChange} className="form-control" disabled={this.state.companies.length === 0}
                 >
