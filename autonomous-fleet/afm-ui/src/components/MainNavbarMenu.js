@@ -3,7 +3,7 @@ import { MdMenu, MdEnhancedEncryption } from 'react-icons/md';
 import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 
-import {withCookies, Cookies} from 'react-cookie'
+import {withCookies} from 'react-cookie'
 
 
 // ############### Constructor ###############
@@ -22,7 +22,7 @@ class MainNavbarMenu extends React.Component {
 
   componentDidMount(){
     axios
-      .get('http://127.0.0.1:8000/user-companies/', {
+      .get('http://127.0.0.1:8000/api/company/user_companies/', {
         params: {
           id: this.state.user[0],
         },
@@ -31,11 +31,8 @@ class MainNavbarMenu extends React.Component {
         const tempArray=[];
         // Getting the name and id of the company and putting them in an array
         res.data.map((item, index) =>
-          tempArray.push({[item.company_name]: item.id})
+          tempArray.push({[item.id]: item.company_name})
         );
-
-        console.log(tempArray);
-
         // Adding the array to the state
         this.setState({
           companies: tempArray
@@ -47,8 +44,6 @@ class MainNavbarMenu extends React.Component {
           this.setState({
             cookieValue: firstID[0]
           });
-        }else{
-          // Show the value corresponding to the id from the cookie
         }
       })
       .catch((error) => {
@@ -57,22 +52,14 @@ class MainNavbarMenu extends React.Component {
   }
 
   handleChange = (event) =>{
-    let selectedItem = this.state.companies[event.target.selectedIndex];
-    this.setState({
-      selectedCompanyID: selectedItem[event.target.value]
-    })
-    
-    // saving selected company id in cookie
     const {cookies} = this.props;
-    // cookies.set('companyID', this.state.selectedCompanyID);
-    // this.setState({ cookieValue: this.state.selectedCompanyID });
     cookies.set('companyID', event.target.value);
     this.setState({ cookieValue: event.target.value });
   }
 
   // ############# RENDER ###########
   render() {
-    const { match, location, history } = this.props;
+    // const { match, location, history } = this.props;
     return (
       <nav className='navbar navbar-expand-lg navbar-light bg-light'>
         <div className='container-fluid'>
@@ -112,22 +99,23 @@ class MainNavbarMenu extends React.Component {
                 </div>
               </li> */}
               <li>
-                <select onChange={this.handleChange} className="form-control" disabled={this.state.companies.length === 0}
+                <select 
+                  onChange={this.handleChange} 
+                  className="form-control" 
+                  disabled={this.state.companies.length === 0}
+                  value={this.state.cookieValue}
                 >
-                  {(this.state.companies.length === 0) ? 
-                     (<option style={{display: 'none'}}>No company found</option>)
-                    :
-                     (
-                      // Going through the array's values
-                      this.state.companies.map((item, index) => {
-                        return (
-                            <option selected={(this.state.cookieValue ===  Object.keys(item)) ? ('selected') : (null)}>
-                              {Object.keys(item)}
-                            </option>
-                          
-                        );
+                  {
+                  (this.state.companies.length === 0) 
+                  ? (<option style={{display: 'none'}}>No company found</option>)
+                  : (
+                    this.state.companies.map((item, index) => {
+                      return(
+                      <option key={index} value={Object.keys(item)}>{item[Object.keys(item)]}</option>
+                      );
                     })
-                    )}
+                  )
+                  }
                 </select>
               </li>
               <li className='nav-item'>

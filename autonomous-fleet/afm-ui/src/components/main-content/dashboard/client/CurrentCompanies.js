@@ -13,7 +13,7 @@ export default class CurrentCompanies extends React.Component {
 
   componentDidMount() {
     axios
-      .get('http://127.0.0.1:8000/user-companies/', {
+      .get('http://127.0.0.1:8000/api/company/user_companies/', {
         params: {
           id: this.state.user[0],
         },
@@ -38,7 +38,7 @@ export default class CurrentCompanies extends React.Component {
             <tr>
               <th>Company name</th>
               <th>VAT</th>
-              <th>Adress</th>
+              <th>Address</th>
               <th>Country</th>
               <th>Registration number</th>
             </tr>
@@ -47,20 +47,11 @@ export default class CurrentCompanies extends React.Component {
             {this.state.currentCompanies.map((item, index) => {
               return (
                 <tr key={index}>
-                  {Object.keys(item).map((key, i) => {
-                    // displays current company, VAT, address, country, reg no from DB
-                    if (
-                      key !== 'id' &&
-                      key !== 'company_id' &&
-                      key !== 'is_supplier' &&
-                      key !== 'is_client' &&
-                      key !== 'user' &&
-                      key !== 'country_id'
-                    ) {
-                      return <td key={i}>{item[key]}</td>;
-                    }
-                    return null;
-                  })}
+                  <td>{item['company_name']}</td>
+                  <td>{item['vat_id']}</td>
+                  <td>{item['adress']}</td>
+                  <td>{item['country']}</td>
+                  <td>{item['registration_number']}</td>
                 </tr>
               );
             })}
