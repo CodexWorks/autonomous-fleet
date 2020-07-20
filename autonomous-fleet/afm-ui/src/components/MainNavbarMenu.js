@@ -14,9 +14,8 @@ class MainNavbarMenu extends React.Component {
     const {cookies} = props;
 
     this.state = {
-      user: [1],
+      user: [2],
       companies: [],
-      selectedCompanyID: 0,
       cookieValue: cookies.get('companyID'),
     };
   }
@@ -35,6 +34,8 @@ class MainNavbarMenu extends React.Component {
           tempArray.push({[item.company_name]: item.id})
         );
 
+        console.log(tempArray);
+
         // Adding the array to the state
         this.setState({
           companies: tempArray
@@ -42,9 +43,9 @@ class MainNavbarMenu extends React.Component {
         
         if(!this.state.cookieValue){
           //Obtaining the first company's ID if the cookie isn't valid
-          let firstID=Object.keys(tempArray[0]).map(key => tempArray[0][key])[0];
+          let firstID=Object.keys(tempArray[0]);
           this.setState({
-            selectedCompanyID: firstID
+            cookieValue: firstID[0]
           });
         }else{
           // Show the value corresponding to the id from the cookie
@@ -63,8 +64,10 @@ class MainNavbarMenu extends React.Component {
     
     // saving selected company id in cookie
     const {cookies} = this.props;
-    cookies.set('companyID', this.state.selectedCompanyID);
-    this.setState({ cookieValue: this.state.selectedCompanyID });
+    // cookies.set('companyID', this.state.selectedCompanyID);
+    // this.setState({ cookieValue: this.state.selectedCompanyID });
+    cookies.set('companyID', event.target.value);
+    this.setState({ cookieValue: event.target.value });
   }
 
   // ############# RENDER ###########
@@ -109,19 +112,22 @@ class MainNavbarMenu extends React.Component {
                 </div>
               </li> */}
               <li>
+                {this.state.cookieValue}
+              </li>
+              <li>
                 <select onChange={this.handleChange} className="form-control" disabled={this.state.companies.length === 0}
                 >
                   {(this.state.companies.length === 0) ? 
-                    (<option style={{display: 'none'}}>No company found</option>)
+                     (<option style={{display: 'none'}}>No company found</option>)
                     :
                      (
                       // Going through the array's values
                       this.state.companies.map((item, index) => {
                         return (
-                          // For each value an <option> tag is created with the item's name
-                          Object.keys(item).map((key, i) => {
-                            return <option selected={this.state.cookieValue === item[key]}>{key}</option>
-                          })
+                            <option selected={(this.state.cookieValue ===  Object.keys(item)) ? ('selected') : (null)}>
+                              {Object.keys(item)}
+                            </option>
+                          
                         );
                     })
                     )}
