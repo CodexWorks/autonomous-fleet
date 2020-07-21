@@ -28,19 +28,19 @@ class MainNavbarMenu extends React.Component {
         },
       })
       .then((res) => {
-        const tempArray=[];
+        const companyNameAndId=[];
         // Getting the name and id of the company and putting them in an array
         res.data.map((item, index) =>
-          tempArray.push({[item.id]: item.company_name})
+          companyNameAndId.push({[item.id]: item.company_name})
         );
         // Adding the array to the state
         this.setState({
-          companies: tempArray
+          companies: companyNameAndId
         });
         
         if(!this.state.cookieValue){
           //Obtaining the first company's ID if the cookie isn't valid
-          let firstID=Object.keys(tempArray[0]);
+          let firstID=Object.keys(companyNameAndId[0]);
           this.setState({
             cookieValue: firstID[0]
           });
@@ -51,7 +51,7 @@ class MainNavbarMenu extends React.Component {
       });
   }
 
-  handleChange = (event) =>{
+  handleCookieValueChange = (event) =>{
     const {cookies} = this.props;
     cookies.set('companyID', event.target.value);
     this.setState({ cookieValue: event.target.value });
@@ -100,7 +100,7 @@ class MainNavbarMenu extends React.Component {
               </li> */}
               <li>
                 <select 
-                  onChange={this.handleChange} 
+                  onChange={this.handleCookieValueChange} 
                   className="form-control" 
                   disabled={this.state.companies.length === 0}
                   value={this.state.cookieValue}
@@ -110,8 +110,9 @@ class MainNavbarMenu extends React.Component {
                   ? (<option style={{display: 'none'}}>No company found</option>)
                   : (
                     this.state.companies.map((item, index) => {
+                      let companyID = Object.keys(item);
                       return(
-                      <option key={index} value={Object.keys(item)}>{item[Object.keys(item)]}</option>
+                      <option key={index} value={companyID}>{item[companyID]}</option>
                       );
                     })
                   )
