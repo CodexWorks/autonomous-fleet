@@ -9,7 +9,7 @@ import './js/main.js';
 import Orders from './components/main-content/dashboard/client/Orders';
 import CurrentCompanies from './components/main-content/dashboard/client/CurrentCompanies';
 import CreateCompany from './components/main-content/dashboard/client/micro-components/CreateCompany';
-import CurrentAuctionRooms from './components/main-content/dashboard/client/CurrentAuctionRooms';
+import AuctionHouse from './components/main-content/dashboard/client/AuctionHouse';
 import appConfig from './appConfig';
 
 import LandingPage from './components/LandingPage';
@@ -51,7 +51,7 @@ class Main extends Component {
                   <Route exact path='/transport-orders' component={Orders} />
                   <Route path='/companies' component={CreateCompany} />
                   <Route path='/companies' component={CurrentCompanies} />
-                  <Route path='/auction-house' component={CurrentAuctionRooms} />
+                  <Route path='/auction-house' component={AuctionHouse} />
                 </div>
               </div>
               <div className='App-content'>

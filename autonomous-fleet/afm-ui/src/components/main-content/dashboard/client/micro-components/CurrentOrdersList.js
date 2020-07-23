@@ -14,8 +14,8 @@ const CurrentOrdersList = ({ currentOrders }) => {
             pickupUntil={currentOrders[i].pickup_until}
             deliveryFrom={currentOrders[i].delivery_from}
             deliveryUntil={currentOrders[i].delivery_until}
-            pickupAddressId={currentOrders[i].pickup_address_id}
-            deliveryAddressId={currentOrders[i].delivery_address_id}
+            pickupAddressId={currentOrders[i].pickup_address}
+            deliveryAddressId={currentOrders[i].delivery_address}
             price={currentOrders[i].price}
             currency={currentOrders[i].currency}
             pallets={currentOrders[i].pallets}

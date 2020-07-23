@@ -80,7 +80,7 @@ export default class CreateCompany extends React.Component {
 
   // Getting user id by using the token
   userpost() {
-    let data = { key: '3be53b404e6763bc0b8b64d2807a0797f6adfa19' };
+    let data = { key: '959973fe4e734eb26c51ee4302794653b282679c' };
     axios.post('http://127.0.0.1:8000/user/', data).then((res) => {
       this.setState({
         user: [res.data.id],

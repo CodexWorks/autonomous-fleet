@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import axios from 'axios';
+
+import CurrentAuctionRooms from './micro-components/CurrentAuctionRooms';
 
 // ############### Constructor ###############
 export default class CurrentCompanies extends React.Component {
@@ -8,6 +10,7 @@ export default class CurrentCompanies extends React.Component {
     this.state = {
       user: [2],
       auctionRooms: [],
+      orders: [],
     };
   }
 
@@ -20,11 +23,24 @@ export default class CurrentCompanies extends React.Component {
       })
       .then((res) => {
         this.setState({
-            auctionRooms: res.data
+          auctionRooms: res.data,
         });
+        console.log(this.state.auctionRooms);
       })
       .catch((error) => {
         console.log('GET user auction room error: ' + error);
+      });
+
+    axios
+      .get('http://127.0.0.1:8000/api/transport-order')
+      .then((res) => {
+        this.setState({
+          orders: res.data,
+        });
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log('get orders for ARs err ' + error);
       });
   }
 
@@ -33,26 +49,18 @@ export default class CurrentCompanies extends React.Component {
   render() {
     return (
       <div>
-          <h3>Auction Rooms</h3>
+        <h3>Auction Rooms</h3>
         <table className='table'>
           <thead className='thead-dark'>
             <tr>
-                <th>Name</th>
-                <th>Company</th>
-                <th>Description</th>
-                <th>Creation date</th>
+              <th>Name</th>
+              <th>Company</th>
+              <th>Description</th>
+              <th>Creation date</th>
             </tr>
-           </thead>
-           <tbody>
-               {this.state.auctionRooms.map((item, index) => {
-                   return (
-                   <tr key={index}>
-                       <td>{item['name']}</td>
-                       <td>{item['company']}</td>
-                       <td>{item['description']}</td>
-                       <td>{item['creation_date']}</td>
-                   </tr>)
-               })}
+          </thead>
+          <tbody>
+            <CurrentAuctionRooms auctionRooms={this.state.auctionRooms} />
           </tbody>
         </table>
       </div>

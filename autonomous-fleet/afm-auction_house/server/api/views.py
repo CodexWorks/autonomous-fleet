@@ -7,12 +7,27 @@ from django.views.decorators.csrf import csrf_exempt
 from server.models import TransportOrder, Company, Address, AuctionRoom
 from django.contrib.auth import get_user_model
 from .serializers import TransportOrderSerializer, CompanySerializer, AddressSerializer, AuctionRoomSerializer
-
 import json
 
 class TransportOrderViewSet(viewsets.ModelViewSet):
     serializer_class = TransportOrderSerializer
     queryset = TransportOrder.objects.all()
+
+    @action(detail=False, methods=['get'])
+    def user_orders(self, request):
+        data = request.query_params
+        if request.method == 'GET':
+            orders = TransportOrder.objects.filter(user=data['id'])
+            serializer = TransportOrderSerializer(orders, many=True)
+            return Response(serializer.data)
+
+    @action(detail=False, methods=['post'])
+    def auction_room_orders(self, request):
+        data = json.loads(request.body.decode('utf-8'))
+        if request.method == 'POST':
+            orders = TransportOrder.objects.filter(auction_room_id=data['id'])
+            serializer = TransportOrderSerializer(orders, many=True)
+            return Response(serializer.data)
 
 class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = CompanySerializer

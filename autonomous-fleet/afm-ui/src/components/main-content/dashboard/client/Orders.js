@@ -9,17 +9,21 @@ export default class CurrentOrdersContainer extends React.Component {
     this.state = {
       currentOrders: [],
       isShowing: false,
+      user: [2]
     };
   }
 
   onClick = () => {
     axios
-      .get('http://127.0.0.1:8000/api/transport-order')
+      .get('http://127.0.0.1:8000/api/transport-order/user_orders',{
+        params: {
+          id: this.state.user[0],
+        },
+      })
       .then((res) => {
         this.setState({
           currentOrders: res.data,
         });
-        console.log(res.data);
       })
       .catch((error) => {
         console.log('get currentOrders err ' + error);

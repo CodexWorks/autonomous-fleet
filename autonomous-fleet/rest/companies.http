@@ -1,0 +1,17 @@
+GET http://localhost:8000/api/company/user_companies/?id=3 
+###
+POST http://127.0.0.1:8000/api/company/
+Content-Type: application/json;charset=UTF-8
+
+{
+    "company_id": 7,
+    "company_name": "Company Seven",
+    "vat_id": "7",
+    "is_supplier": "true",
+    "is_client": "false",
+    "adress": "Seven City",
+    "country_id": 2,
+    "country": "Romania",
+    "registration_number": 4,
+    "user": [3]
+}

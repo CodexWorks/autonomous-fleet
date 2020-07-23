@@ -1,10 +1,10 @@
 import React from 'react';
 
 const CurrentOrders = (props) => {
-  // Parsing props keys nad returning key & value for each one
-  return Object.keys(props).map((key) => {
+  // Parsing props keys and returning key & value for each one
+  return Object.keys(props).map((key, i) => {
     return (
-      <p>
+      <p key={i}>
         <strong>{key}: </strong> {props[key]}
       </p>
     );
