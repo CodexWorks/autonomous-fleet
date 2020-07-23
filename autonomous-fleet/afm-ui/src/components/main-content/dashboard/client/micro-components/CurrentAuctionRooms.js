@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import OrdersByAuctionRooms from './OrdersByAuctionRoom';
 
 const CurrentAuctionRooms = (props) => {
   return (
@@ -7,15 +6,10 @@ const CurrentAuctionRooms = (props) => {
       {props.auctionRooms.map((item, index) => {
         return (
           <Fragment>
-            <tr key={index}>
-              <td>{item['name']}</td>
-              <td>{item['company']}</td>
-              <td>{item['description']}</td>
-              <td>{item['creation_date']}</td>
-            </tr>
-            <div>
-              <OrdersByAuctionRooms />
-            </div>
+            <div className='auctionRoomName'>{item['name']}</div>
+            <div className='auctionRoomCompany'>{item['company']}</div>
+            <div className='auctionRoomDescription'>{item['description']}</div>
+            <div className='auctionRoomDate'>{item['creation_date']}</div>
           </Fragment>
         );
       })}

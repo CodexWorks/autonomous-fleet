@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import axios from 'axios';
 
 import CurrentAuctionRooms from './micro-components/CurrentAuctionRooms';
+import OrdersByAuctionRooms from './micro-components/OrdersByAuctionRoom';
+import Scroll from '../../../Scroll';
 
 // ############### Constructor ###############
 export default class CurrentCompanies extends React.Component {
@@ -50,19 +52,30 @@ export default class CurrentCompanies extends React.Component {
     return (
       <div>
         <h3>Auction Rooms</h3>
-        <table className='table'>
-          <thead className='thead-dark'>
-            <tr>
-              <th>Name</th>
-              <th>Company</th>
-              <th>Description</th>
-              <th>Creation date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <CurrentAuctionRooms auctionRooms={this.state.auctionRooms} />
-          </tbody>
-        </table>
+        <Scroll>
+          <div className='auctionRoomsContainer'>
+            <hr class='fancy-line' />
+            <div className='auctionRoomsGridContainer'>
+              <div className='auctionRoomCol1'>Name</div>
+              <div className='auctionRoomCol2'>Company</div>
+              <div className='auctionRoomCol3'>Description</div>
+              <div className='auctionRoomCol4'>Creation</div>
+              <CurrentAuctionRooms auctionRooms={this.state.auctionRooms} />
+            </div>
+            <hr class='fancy-line' />
+            <div className='ordersGridContainer'>
+              <div className='orderCol1'>Pick-up (from-until)</div>
+              <div className='orderCol2'>Delivery (from-until)</div>
+              <div className='orderCol3'>Volume</div>
+              <div className='orderCol4'>Weight</div>
+              <div className='orderCol5'>LDM</div>
+              <div className='orderCol6'>Pallets</div>
+              <div className='orderCol7'>Address</div>
+              <div className='orderCol8'>Price</div>
+              <OrdersByAuctionRooms orders={this.state.orders} />
+            </div>
+          </div>
+        </Scroll>
       </div>
     );
   }

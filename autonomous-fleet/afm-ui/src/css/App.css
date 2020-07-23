@@ -297,6 +297,90 @@ a.article:hover {
 .mainContentStyle {
     margin-bottom: 30px;
 }
+
+/* ---------------------------------------------------
+    AUCTION ROOMS
+----------------------------------------------------- */
+
+.auctionRoomsContainer {
+    min-width: 2000px;
+}
+
+.auctionRoomsGridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10% 5%;
+    /* grid-template-areas: "div div div div" "div div div div"; */
+    grid-template-areas: "head1 head2 head3 head4" "i1 i2 i3 i4";
+}
+  
+.auctionRoomCol1 { grid-area: head1; }
+.auctionRoomCol2 { grid-area: head2; }
+.auctionRoomCol3 { grid-area: head3; }
+.auctionRoomCol4 { grid-area: head4; }
+.auctionRoomName { grid-area: i1; }
+.auctionRoomCompany { grid-area: i2; }
+.auctionRoomDescription { grid-area: i3; }
+.auctionRoomDate { grid-area: i4; }
+
+.ordersGridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1% 5%;
+    /* grid-template-areas: "div div div div" "div div div div"; */
+    grid-template-areas: "head1 head2 head3 head4 head5 head6 head7 head8" "i1 i2 i3 i4 i5 i6 i7 i8";
+}
+
+.orderCol1 { grid-area: head1; }
+.orderCol2 { grid-area: head2; }
+.orderCol3 { grid-area: head3; }
+.orderCol4 { grid-area: head4; }
+.orderCol5 { grid-area: head5; }
+.orderCol6 { grid-area: head6; }
+.orderCol7 { grid-area: head7; }
+.orderCol8 { grid-area: head8; }
+.orderPickupDate { grid-area: i1; }
+.orderDeliveryDate { grid-area: i2; }
+.orderVolume { grid-area: i3; }
+.orderWeight { grid-area: i4; }
+.orderLdm { grid-area: i5; }
+.orderPallets { grid-area: i6; }
+.orderDeliveryAddress { grid-area: i7; }
+.orderPrice { grid-area: i8; }
+
+hr.fancy-line { 
+    border: 0; 
+    height: 1px;
+
+}
+hr.fancy-line:before {
+    top: -0.5em;
+    height: 1em;
+}
+hr.fancy-line:after {
+    content:'';
+    height: 0.5em;
+    top: 1px;
+}
+
+hr.fancy-line:before, hr.fancy-line:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+}
+
+hr.fancy-line, hr.fancy-line:before {
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
+}
+
+body, hr.fancy-line:after {
+    background: #f4f4f4;
+}
+
+
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
