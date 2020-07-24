@@ -4,6 +4,12 @@ from django.contrib.auth import get_user_model
 import datetime
 
 class TransportOrder(models.Model):
+
+    class OrderStatus(models.TextChoices):
+        AVAILABLE = 'Available'
+        PENDING = 'Pending'
+        ACCEPTED = 'Accepted'
+
     auction_room_id = models.ForeignKey('AuctionRoom', on_delete=models.CASCADE)
     user = models.ForeignKey(get_user_model(), related_name='user', on_delete=models.CASCADE, null=True)
     transport_order_id = models.IntegerField(blank=True, null=True)
@@ -11,8 +17,8 @@ class TransportOrder(models.Model):
     pickup_until = models.DateField(('pickup until date'), default=datetime.date.today)
     delivery_from = models.DateField(('delivery from date'), default=datetime.date.today)
     delivery_until = models.DateField(('delivery until date'), default=datetime.date.today)
-    pickup_address = models.OneToOneField('Address', related_name='pickup_address', on_delete=models.CASCADE)
-    delivery_address = models.OneToOneField('Address', related_name='delivery_address', on_delete=models.CASCADE)
+    pickup_address = models.ForeignKey('Address', related_name='pickup_address', on_delete=models.CASCADE)
+    delivery_address = models.ForeignKey('Address', related_name='delivery_address', on_delete=models.CASCADE)
     price = models.FloatField(blank=True, null=True)
     currency = models.CharField(blank=True, null=True, max_length=3)
     pallets = models.FloatField(blank=True, null=True)
@@ -21,7 +27,7 @@ class TransportOrder(models.Model):
     volume = models.FloatField(blank=True, null=True)
     supplier_company = models.ForeignKey('Company',  null=True, blank=True, on_delete=models.CASCADE)
     supplier_user = models.ForeignKey(get_user_model(), related_name='supplier_user', null=True, blank=True, on_delete=models.CASCADE)
-    status = models.CharField(blank=True, null=True, max_length=10)
+    status = models.CharField(max_length=15, choices=OrderStatus.choices, default=OrderStatus.AVAILABLE)
 
     class Meta:
         db_table = 'transport_orders'

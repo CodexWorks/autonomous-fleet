@@ -16,8 +16,11 @@ class MainNavbarMenu extends React.Component {
     this.state = {
       user: [2],
       companies: [],
-      cookieValue: cookies.get('companyID'),
+      cookieValue: cookies.get('companyData'),
+      selectedValue: cookies.get('companyIndex')
     };
+
+    console.log(this.state.cookieValue)
   }
 
   componentDidMount(){
@@ -28,21 +31,25 @@ class MainNavbarMenu extends React.Component {
         },
       })
       .then((res) => {
-        const companyNameAndId=[];
+        const companyData=[];
         // Getting the name and id of the company and putting them in an array
-        res.data.map((item, index) =>
-          companyNameAndId.push({[item.id]: item.company_name})
-        );
+        res.data.map((item, index) => {
+          companyData.push({
+            'id': item['id'], 
+            'name': item['company_name'], 
+            'is_supplier': item['is_supplier']
+          })
+        });
         // Adding the array to the state
         this.setState({
-          companies: companyNameAndId
+          companies: companyData
         });
         
-        if(!this.state.cookieValue){
+        if(!(this.state.selectedValue) || (this.state.selectedValue >= this.state.companies.length)){
           //Obtaining the first company's ID if the cookie isn't valid
-          let firstID=Object.keys(companyNameAndId[0]);
           this.setState({
-            cookieValue: firstID[0]
+            cookieValue: {'id': companyData[0]['id'], 'is_supplier': companyData[0]['is_supplier']},
+            selectedValue: 0,
           });
         }
       })
@@ -53,8 +60,17 @@ class MainNavbarMenu extends React.Component {
 
   handleCookieValueChange = (event) =>{
     const {cookies} = this.props;
-    cookies.set('companyID', event.target.value);
-    this.setState({ cookieValue: event.target.value });
+    const index = event.target.value;
+    let cookieData = {
+      'id': this.state.companies[index].id,
+      'is_supplier': this.state.companies[index].is_supplier
+    }
+    cookies.set('companyData', cookieData);
+    cookies.set('companyIndex', index)
+    this.setState({ 
+      cookieValue: cookieData,
+      selectedValue: index 
+    });
   }
 
   // ############# RENDER ###########
@@ -103,16 +119,15 @@ class MainNavbarMenu extends React.Component {
                   onChange={this.handleCookieValueChange} 
                   className="form-control" 
                   disabled={this.state.companies.length === 0}
-                  value={this.state.cookieValue}
+                  value={this.state.selectedValue}
                 >
                   {
                   (this.state.companies.length === 0) 
                   ? (<option style={{display: 'none'}}>No company found</option>)
                   : (
                     this.state.companies.map((item, index) => {
-                      let companyID = Object.keys(item);
                       return(
-                      <option key={index} value={companyID}>{item[companyID]}</option>
+                      <option key={index} value={index}>{item['name']}</option>
                       );
                     })
                   )

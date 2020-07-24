@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, action
 from django.views.decorators.csrf import csrf_exempt
 
+from django.http import HttpResponse
+
 from server.models import TransportOrder, Company, Address, AuctionRoom
 from django.contrib.auth import get_user_model
 from .serializers import TransportOrderSerializer, CompanySerializer, AddressSerializer, AuctionRoomSerializer
@@ -16,18 +18,33 @@ class TransportOrderViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'])
     def user_orders(self, request):
         data = request.query_params
-        if request.method == 'GET':
-            orders = TransportOrder.objects.filter(user=data['id'])
-            serializer = TransportOrderSerializer(orders, many=True)
-            return Response(serializer.data)
+        orders = TransportOrder.objects.filter(user=data['id'])
+        serializer = TransportOrderSerializer(orders, many=True)
+        return Response(serializer.data)
 
-    @action(detail=False, methods=['post'])
+    @action(detail=False, methods=['get'])
     def auction_room_orders(self, request):
+        data = request.query_params
+        orders = TransportOrder.objects.filter(auction_room_id=data['id'])
+        serializer = TransportOrderSerializer(orders, many=True)
+        return Response(serializer.data)
+    
+    @action(detail=False, methods=['post'])
+    def update_order_state(self, request):
         data = json.loads(request.body.decode('utf-8'))
-        if request.method == 'POST':
-            orders = TransportOrder.objects.filter(auction_room_id=data['id'])
-            serializer = TransportOrderSerializer(orders, many=True)
-            return Response(serializer.data)
+        order = TransportOrder.objects.get(id=data['id'])
+        order.supplier_company_id=data['company']
+        order.supplier_user_id=data['user']
+        order.status='Accepted'
+        order.save()
+        return HttpResponse(status=204)
+    
+    @action(detail=False, methods=['get'])
+    def user_accepted_orders(self, request):
+        data = request.query_params
+        accepted_orders = TransportOrder.objects.filter(supplier_user=data['user'])
+        serializer = TransportOrderSerializer(accepted_orders, many=True)
+        return Response(serializer.data)
 
 class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = CompanySerializer

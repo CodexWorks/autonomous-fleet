@@ -5,7 +5,7 @@ const CurrentAuctionRooms = (props) => {
     <Fragment>
       {props.auctionRooms.map((item, index) => {
         return (
-          <Fragment>
+          <Fragment key={index}>
             <div className='auctionRoomName'>{item['name']}</div>
             <div className='auctionRoomCompany'>{item['company']}</div>
             <div className='auctionRoomDescription'>{item['description']}</div>

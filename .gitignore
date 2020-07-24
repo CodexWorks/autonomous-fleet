@@ -204,3 +204,4 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+autonomous-fleet/afm-auction_house/server/settings.py

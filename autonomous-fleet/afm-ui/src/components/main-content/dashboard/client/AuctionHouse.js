@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 import CurrentAuctionRooms from './micro-components/CurrentAuctionRooms';
@@ -27,7 +27,6 @@ export default class CurrentCompanies extends React.Component {
         this.setState({
           auctionRooms: res.data,
         });
-        console.log(this.state.auctionRooms);
       })
       .catch((error) => {
         console.log('GET user auction room error: ' + error);
@@ -39,7 +38,6 @@ export default class CurrentCompanies extends React.Component {
         this.setState({
           orders: res.data,
         });
-        console.log(res.data);
       })
       .catch((error) => {
         console.log('get orders for ARs err ' + error);
@@ -54,7 +52,7 @@ export default class CurrentCompanies extends React.Component {
         <h3>Auction Rooms</h3>
         <Scroll>
           <div className='auctionRoomsContainer'>
-            <hr class='fancy-line' />
+            <hr className='fancy-line' />
             <div className='auctionRoomsGridContainer'>
               <div className='auctionRoomCol1'>Name</div>
               <div className='auctionRoomCol2'>Company</div>
@@ -62,7 +60,7 @@ export default class CurrentCompanies extends React.Component {
               <div className='auctionRoomCol4'>Creation</div>
               <CurrentAuctionRooms auctionRooms={this.state.auctionRooms} />
             </div>
-            <hr class='fancy-line' />
+            <hr className='fancy-line' />
             <div className='ordersGridContainer'>
               <div className='orderCol1'>Pick-up (from-until)</div>
               <div className='orderCol2'>Delivery (from-until)</div>
@@ -72,6 +70,8 @@ export default class CurrentCompanies extends React.Component {
               <div className='orderCol6'>Pallets</div>
               <div className='orderCol7'>Address</div>
               <div className='orderCol8'>Price</div>
+              <div className='orderCol9'>Status</div>
+              <div className='orderCol10'>Accept</div>
               <OrdersByAuctionRooms orders={this.state.orders} />
             </div>
           </div>
