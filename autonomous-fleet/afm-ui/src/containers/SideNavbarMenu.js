@@ -1,7 +1,6 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import logo from '../imgs/logo_afm.svg';
-import SideNavbarMenuItem from './side-navbar-menu/SideNavbarMenuItem';
+import logo from '../imgs/logo.svg';
+import SideNavbarMenuItem from '../components/side-navbar-menu/SideNavbarMenuItem';
 
 // ############### Constructor ###############
 export default class SideNavbarMenu extends React.Component {

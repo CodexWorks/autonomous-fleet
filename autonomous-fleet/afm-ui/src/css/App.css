@@ -1,4 +1,11 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
@@ -302,53 +309,51 @@ a.article:hover {
     AUCTION ROOMS
 ----------------------------------------------------- */
 
-.auctionRoomsContainer {
-    min-width: 2000px;
+.table-container {
+    width: 90%;
+    max-width: 300px;
+    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
 }
 
-.auctionRoomsGridContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 10% 5%;
-    /* grid-template-areas: "div div div div" "div div div div"; */
-    grid-template-areas: "head1 head2 head3 head4" "i1 i2 i3 i4";
+tr.indented-row .flex-row {
+    padding-left: 50px;
+    background-color: #fff;
+}
+
+td {
+    border-bottom: 1px solid #7386D5;
+    padding: 0.5em;
+    min-width: 300px;
+}
+
+th {
+    background: #7386D5;
+    color: white;
+    padding: 0.5em;
+    border: 1px solid #7386D5;
+    min-width: 300px;
 }
   
-.auctionRoomCol1 { grid-area: head1; }
-.auctionRoomCol2 { grid-area: head2; }
-.auctionRoomCol3 { grid-area: head3; }
-.auctionRoomCol4 { grid-area: head4; }
-.auctionRoomName { grid-area: i1; }
-.auctionRoomCompany { grid-area: i2; }
-.auctionRoomDescription { grid-area: i3; }
-.auctionRoomDate { grid-area: i4; }
-
-.ordersGridContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 1% 5%;
-    /* grid-template-areas: "div div div div" "div div div div"; */
-    grid-template-areas: "head1 head2 head3 head4 head5 head6 head7 head8" "i1 i2 i3 i4 i5 i6 i7 i8";
+.flex-row {
+    width: 25%;
 }
 
-.orderCol1 { grid-area: head1; }
-.orderCol2 { grid-area: head2; }
-.orderCol3 { grid-area: head3; }
-.orderCol4 { grid-area: head4; }
-.orderCol5 { grid-area: head5; }
-.orderCol6 { grid-area: head6; }
-.orderCol7 { grid-area: head7; }
-.orderCol8 { grid-area: head8; }
-.orderPickupDate { grid-area: i1; }
-.orderDeliveryDate { grid-area: i2; }
-.orderVolume { grid-area: i3; }
-.orderWeight { grid-area: i4; }
-.orderLdm { grid-area: i5; }
-.orderPallets { grid-area: i6; }
-.orderDeliveryAddress { grid-area: i7; }
-.orderPrice { grid-area: i8; }
+.bolded-cell {
+    font-weight: bold;
+}
+/* .flex-row {
+    text-align: center;
+} */
+
+/* .indented-row {
+    border-style: dotted;
+} */
+
+/* ---------------------------------------------------
+    FANCY SEPARATOR LINE
+----------------------------------------------------- */
 
 hr.fancy-line { 
     border: 0; 
@@ -379,7 +384,24 @@ body, hr.fancy-line:after {
     background: #f4f4f4;
 }
 
+/* ---------------------------------------------------
+    FANCY BREAK TAG
+----------------------------------------------------- */
 
+.br { 
+    display: block; 
+    margin-bottom: 0em; 
+} 
+  
+.brmedium { 
+    display: block; 
+    margin-bottom: 1em; 
+} 
+  
+.brlarge { 
+    display: block; 
+    margin-bottom: 2em; 
+} 
 
 /* ---------------------------------------------------
     MEDIAQUERIES

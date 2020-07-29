@@ -1,23 +1,23 @@
 import React from 'react';
-import axios from 'axios';
+import { API } from '../../utils/API';
 
 // ############### Constructor ###############
-export default class CurrentCompanies extends React.Component {
+export default class Companies extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: [2],
+      user: [2, 3],
       currentCompanies: [],
     };
   }
 
+  // REFACTOR!!
   componentDidMount() {
-    axios
-      .get('http://127.0.0.1:8000/api/company/user_companies/', {
-        params: {
-          id: this.state.user[0],
-        },
-      })
+    API.get('/company/user_companies/', {
+      params: {
+        id: this.state.user[0],
+      },
+    })
       .then((res) => {
         this.setState({
           currentCompanies: res.data,

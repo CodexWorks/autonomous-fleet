@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import logo from '../imgs/logo_afm.svg';
+import logo from '../imgs/logo.svg';
 
-import Login from './Login';
-import SignUp from './SignUp';
+import Login from '../components/landing-page/Login';
+import SignUp from '../components/landing-page/SignUp';
 
 export default class LandingPage extends Component {
   render() {

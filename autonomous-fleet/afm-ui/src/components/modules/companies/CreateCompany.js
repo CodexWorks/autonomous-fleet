@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { API } from '../../../utils/API';
 
 // ############### Constructor ###############
 export default class CreateCompany extends React.Component {
@@ -70,14 +71,14 @@ export default class CreateCompany extends React.Component {
       registration_number: this.state.registration_number,
       user: this.state.user,
     };
-    axios
-      .post('http://127.0.0.1:8000/api/company/', payload)
+    API.post('/company/', payload)
       .then((res) => {})
       .catch((error) => {
         console.log('POST new company err ' + error);
       });
   };
 
+  // TODO: refactor this
   // Getting user id by using the token
   userpost() {
     let data = { key: '959973fe4e734eb26c51ee4302794653b282679c' };

@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+// endpoints
+
 class DataService {
   getAuctionHouseData() {
     axios('auction_house/').then((result) => {

@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
-import modules from './modules';
-import MainNavbarMenu from './components/MainNavbarMenu';
-import SideNavbarMenu from './components/SideNavbarMenu';
-import './css/App.css';
-import './js/main.js';
-// import MainContentContainer from './components/MainContentContainer';
-import Orders from './components/main-content/dashboard/client/Orders';
-import CurrentCompanies from './components/main-content/dashboard/client/CurrentCompanies';
-import CreateCompany from './components/main-content/dashboard/client/micro-components/CreateCompany';
-import AuctionHouse from './components/main-content/dashboard/client/AuctionHouse';
-import appConfig from './appConfig';
 
-import LandingPage from './components/LandingPage';
-// import TextBox from './components/TextBox';
+import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
+import modules from '../modules';
+
+import '../css/App.css';
+import '../js/main.js';
+
+import appConfig from '../utils/appConfig.json';
+
+import MainNavbarMenu from './MainNavbarMenu';
+import SideNavbarMenu from './SideNavbarMenu';
+
+import Orders from '../components/modules/Orders';
+import Companies from '../components/modules/Companies';
+import CreateCompany from '../components/modules/companies/CreateCompany';
+import AuctionHouse from '../components/modules/AuctionHouse';
+import LandingPage from './LandingPage';
 
 // ############### Constructor ###############
 class Main extends Component {
@@ -24,12 +26,11 @@ class Main extends Component {
       sideNavbarMenuItems: appConfig.routes,
       currentTab: 'dashboard',
       isLoggedIn: false,
-      user: null, // client || supplie
+      user: null,
     };
   }
 
-  handleChange = (event) =>{
-  }
+  handleChange = (event) => {};
 
   // ############# RENDER ###########
   render() {
@@ -47,10 +48,9 @@ class Main extends Component {
                 <div id='content'>
                   <MainNavbarMenu />
 
-
                   <Route exact path='/transport-orders' component={Orders} />
                   <Route path='/companies' component={CreateCompany} />
-                  <Route path='/companies' component={CurrentCompanies} />
+                  <Route path='/companies' component={Companies} />
                   <Route path='/auction-house' component={AuctionHouse} />
                 </div>
               </div>

@@ -1,54 +1,59 @@
 import React from 'react';
 import { MdMenu, MdEnhancedEncryption } from 'react-icons/md';
 import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
-import axios from 'axios';
+import { API } from '../utils/API';
 
-import {withCookies} from 'react-cookie'
-
+import { withCookies } from 'react-cookie';
 
 // ############### Constructor ###############
 class MainNavbarMenu extends React.Component {
   constructor(props) {
     super(props);
 
-    const {cookies} = props;
+    const { cookies } = props;
 
     this.state = {
       user: [2],
       companies: [],
       cookieValue: cookies.get('companyData'),
-      selectedValue: cookies.get('companyIndex')
+      selectedValue: cookies.get('companyIndex'),
     };
 
-    console.log(this.state.cookieValue)
+    console.log(this.state.cookieValue);
   }
 
-  componentDidMount(){
-    axios
-      .get('http://127.0.0.1:8000/api/company/user_companies/', {
-        params: {
-          id: this.state.user[0],
-        },
-      })
+  // REFACTOR!!
+  componentDidMount() {
+    API.get('/company/user_companies/', {
+      params: {
+        id: this.state.user[0],
+      },
+    })
       .then((res) => {
-        const companyData=[];
+        const companyData = [];
         // Getting the name and id of the company and putting them in an array
         res.data.map((item, index) => {
           companyData.push({
-            'id': item['id'], 
-            'name': item['company_name'], 
-            'is_supplier': item['is_supplier']
-          })
+            id: item['id'],
+            name: item['company_name'],
+            is_supplier: item['is_supplier'],
+          });
         });
         // Adding the array to the state
         this.setState({
-          companies: companyData
+          companies: companyData,
         });
-        
-        if(!(this.state.selectedValue) || (this.state.selectedValue >= this.state.companies.length)){
+
+        if (
+          !this.state.selectedValue ||
+          this.state.selectedValue >= this.state.companies.length
+        ) {
           //Obtaining the first company's ID if the cookie isn't valid
           this.setState({
-            cookieValue: {'id': companyData[0]['id'], 'is_supplier': companyData[0]['is_supplier']},
+            cookieValue: {
+              id: companyData[0]['id'],
+              is_supplier: companyData[0]['is_supplier'],
+            },
             selectedValue: 0,
           });
         }
@@ -58,20 +63,20 @@ class MainNavbarMenu extends React.Component {
       });
   }
 
-  handleCookieValueChange = (event) =>{
-    const {cookies} = this.props;
+  handleCookieValueChange = (event) => {
+    const { cookies } = this.props;
     const index = event.target.value;
     let cookieData = {
-      'id': this.state.companies[index].id,
-      'is_supplier': this.state.companies[index].is_supplier
-    }
+      id: this.state.companies[index].id,
+      is_supplier: this.state.companies[index].is_supplier,
+    };
     cookies.set('companyData', cookieData);
-    cookies.set('companyIndex', index)
-    this.setState({ 
+    cookies.set('companyIndex', index);
+    this.setState({
       cookieValue: cookieData,
-      selectedValue: index 
+      selectedValue: index,
     });
-  }
+  };
 
   // ############# RENDER ###########
   render() {
@@ -115,23 +120,25 @@ class MainNavbarMenu extends React.Component {
                 </div>
               </li> */}
               <li>
-                <select 
-                  onChange={this.handleCookieValueChange} 
-                  className="form-control" 
+                <select
+                  onChange={this.handleCookieValueChange}
+                  className='form-control'
                   disabled={this.state.companies.length === 0}
                   value={this.state.selectedValue}
                 >
-                  {
-                  (this.state.companies.length === 0) 
-                  ? (<option style={{display: 'none'}}>No company found</option>)
-                  : (
+                  {this.state.companies.length === 0 ? (
+                    <option style={{ display: 'none' }}>
+                      No company found
+                    </option>
+                  ) : (
                     this.state.companies.map((item, index) => {
-                      return(
-                      <option key={index} value={index}>{item['name']}</option>
+                      return (
+                        <option key={index} value={index}>
+                          {item['name']}
+                        </option>
                       );
                     })
-                  )
-                  }
+                  )}
                 </select>
               </li>
               <li className='nav-item'>

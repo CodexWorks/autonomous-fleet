@@ -37,11 +37,13 @@ export default class Login extends Component {
   };
 
   onClickSendLoginData = () => {
+    const loginCredentials = {
+      username: this.state.username,
+      password: this.state.password,
+    };
+
     axios
-      .post('http://127.0.0.1:8000/rest-auth/login/', {
-        username: this.state.username,
-        password: this.state.password,
-      })
+      .post('http://127.0.0.1:8000/rest-auth/login/', loginCredentials)
       .then((res) => {
         const token = res.data.key;
         localStorage.setItem('token', token); // sets token in browser local memory
