@@ -50,6 +50,9 @@ pip install djangorestframework
 pip install markdown       # Markdown support for the browsable API.
 pip install django-filter  # Filtering support
 pip install django-cors-headers
+pip install django-rest-auth
+pip install django-allauth
+pip install psycopg2
 ```
 
 ## _Step 3:_
