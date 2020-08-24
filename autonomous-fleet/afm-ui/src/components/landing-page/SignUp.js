@@ -1,13 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 
 export default class SignUp extends Component {
-  state = {
-    username: '',
-    email: '',
-    password1: '',
-    password2: '',
-  };
+  
+  constructor(props){
+    super(props);
+    this.state = {
+      username: '',
+      email: '',
+      password1: '',
+      password2: '',
+    };
+
+  }
+
+  addAName(){
+    this.props.nameTheUser(this.state.username);
+  }
 
   handleUsernameChange = (event) => {
     this.setState({
@@ -53,24 +62,40 @@ export default class SignUp extends Component {
   };
 
   onClikSendRegisteringData = () => {
+    const singUpCredentials={
+      username: this.state.username,
+      email: this.state.email,
+      password1: this.state.password1,
+      password2: this.state.password2
+  };
+    console.log(
+        this.state.username + " "+
+        this.state.email +" "+
+        this.state.password1 +" "+
+        this.state.password2  );
+    alert("onClick");
     axios
-      .post('http://127.0.0.1:8000/rest-auth/registration/', {
+      .post('http://localhost:8000/createUser/', {
         username: this.state.username,
         email: this.state.email,
         password1: this.state.password1,
-        password2: this.state.password2,
-      })
+        password2: this.state.password2
+    })
       .then((res) => {
+        alert("good");
         const token = res.data.key;
         localStorage.setItem('token', token); // sets token in browser local memory
+        alert(token)
+        this.addAName();
       })
       .catch((error) => {
-        console.log('POST user registration error ' + error);
+       alert('POST user registration error ' + error);
       });
   };
 
   render() {
     return (
+      <Fragment>
       <form>
         <h3>Sign Up</h3>
 
@@ -118,17 +143,17 @@ export default class SignUp extends Component {
           />
         </div>
 
-        <button
-          type='submit'
+        <input type='button'
           className='btn btn-primary btn-block'
           onClick={this.onClikSendRegisteringData}
-        >
-          Sign Up
-        </button>
+          value="Sign Up"
+        />
+         
         <p className='forgot-password text-right'>
           Already registered <a href='#'>sign in?</a>
         </p>
       </form>
+      </Fragment>
     );
   }
 }

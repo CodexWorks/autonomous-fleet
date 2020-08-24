@@ -7,6 +7,15 @@ import Login from '../components/landing-page/Login';
 import SignUp from '../components/landing-page/SignUp';
 
 export default class LandingPage extends Component {
+  constructor(props){
+    super(props);
+    this.sendUserName=this.sendUserName.bind(this);
+  }
+
+  sendUserName(name){
+    this.props.nameTheUser(name);
+  }
+
   render() {
     return (
       <Fragment>
@@ -25,12 +34,12 @@ export default class LandingPage extends Component {
               >
                 <ul className='navbar-nav ml-auto'>
                   <li className='nav-item'>
-                    <Link className='nav-link' to={'/sign-in'}>
+                    <Link className='nav-link' to={'/sign-in/'}>
                       Login
                     </Link>
                   </li>
                   <li className='nav-item'>
-                    <Link className='nav-link' to={'/sign-up'}>
+                    <Link className='nav-link' to={'/sign-up/'}>
                       Sign up
                     </Link>
                   </li>
@@ -42,9 +51,10 @@ export default class LandingPage extends Component {
           <div className='auth-wrapper'>
             <div className='auth-inner'>
               <Switch>
-                <Route exact path='/' component={Login} />
-                <Route path='/sign-in' component={Login} />
-                <Route path='/sign-up' component={SignUp} />
+                <Route exact path='/' component={null} />
+                <Route path='/sign-in/' render={()=><Login nameTheUser={this.sendUserName}/>} />
+                {/* <Login nameTheUser={this.sendUserName}/> */}
+                <Route path='/sign-up/' render={()=><SignUp nameTheUser={this.sendUserName}/>} />
               </Switch>
             </div>
           </div>
