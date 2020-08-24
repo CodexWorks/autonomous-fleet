@@ -3,13 +3,23 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, action
 from django.views.decorators.csrf import csrf_exempt
-
+from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.http.response import JsonResponse
+from rest_framework.parsers import JSONParser
 
 from server.models import TransportOrder, Company, Address, AuctionRoom
 from django.contrib.auth import get_user_model
 from .serializers import TransportOrderSerializer, CompanySerializer, AddressSerializer, AuctionRoomSerializer
 import json
+
+
+# This function return the user with a certain id
+
+def getUserName(data):
+    return get_user_model().objects.get(id=data['id'])
+
+
 
 class TransportOrderViewSet(viewsets.ModelViewSet):
     serializer_class = TransportOrderSerializer
@@ -49,12 +59,17 @@ class TransportOrderViewSet(viewsets.ModelViewSet):
 class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = CompanySerializer
     queryset = Company.objects.all()
+    
+    # This function receives a username and obtains a primary key from the database
+    # 
+    # The key is used to return the user's companies
 
     @action(detail=False, methods=['get'])
     def user_companies(self, request):
         data = request.query_params
         if request.method == 'GET':
-            user = get_user_model().objects.get(id=data['id'])
+            id = User.objects.get(username=data["username"]).pk
+            user=get_user_model().objects.get(id=id)
             companies = user.company_set.all()
             serializer = CompanySerializer(companies, many=True)
             return Response(serializer.data)
@@ -71,7 +86,7 @@ class AuctionRoomViewSet(viewsets.ModelViewSet):
     def get_auction_rooms(self, request):
         data = request.query_params
         if request.method == 'GET':
-            user_req = get_user_model().objects.get(id=data['id'])
+            user_req = getUserName(data)
             auction_rooms = AuctionRoom.objects.filter(user=user_req)
             serializer = AuctionRoomSerializer(auction_rooms, many=True)
             return Response(serializer.data)
@@ -83,3 +98,22 @@ def userInfo(request):
     if request.method == 'POST':
         user = Token.objects.get(key=data['key']).user
         return Response({"id": user.id})
+
+
+
+# This function is a workaround for sign up
+# 
+# Receive the data through a post call, create a django User object and save it in the database.
+
+
+@api_view(['POST'])
+def createUser(request):
+    data = json.loads(request.body.decode('utf-8'))
+    if request.method == "POST": 
+        try:
+            user=User.objects.create_user(username=data["username"],email=data["email"],password=data["password1"])
+            user.save()
+            return Response({'good':"work"})
+        except Exception as er:
+            return Response({'err':er})
+        

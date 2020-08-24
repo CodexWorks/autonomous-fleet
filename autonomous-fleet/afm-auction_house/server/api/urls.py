@@ -5,12 +5,16 @@ from server.api.views import (
     AddressViewSet, 
     AuctionRoomViewSet
 )
+# from django.urls import path, include
+# from server.api import views
 
 router = DefaultRouter()
 router.register(r'transport-order', TransportOrderViewSet, basename='transport_order')
 router.register(r'company', CompanyViewSet, basename='company')
 router.register(r'address', AddressViewSet, basename='address')
 router.register(r'auction-room', AuctionRoomViewSet, basename='auction_room')
-urlpatterns = router.urls   
+urlpatterns = router.urls
+                
+
   
    

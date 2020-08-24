@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from server.api import *
 from server.api import views
 
 urlpatterns = [
@@ -24,8 +24,9 @@ urlpatterns = [
     path('api/', include('server.api.urls')),
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
-
-    path('user/', views.userInfo),
+    path('createUser/', views.createUser),
+    path('user/', views.userInfo)
+    
     # path('user-companies/', views.userCompanies)
     # path('auction_house/', views.get_text)
 
