@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import { withRouter, BrowserRouter as Router, Route } from 'react-router-dom';
 import modules from '../modules';
@@ -26,27 +26,41 @@ class Main extends Component {
       sideNavbarMenuItems: appConfig.routes,
       currentTab: 'dashboard',
       isLoggedIn: false,
-      user: null,
+      user: ""
+      
     };
+    this.addAName=this.addAName.bind(this);
   }
 
   handleChange = (event) => {};
+  
+
+  addAName(name){
+    this.setState({user:name});
+
+  };
 
   // ############# RENDER ###########
   render() {
     return (
+      
       <Router>
-        <div className='App'>
-          {localStorage.getItem('token') !== null ? (
-            <Route path='/' component={LandingPage} />
-          ) : (
-            // <LandingPage />
+        <div>
+          
+          {localStorage.getItem('token') === "null" ? (
             <div>
+              {/* Remove route */}
+            <LandingPage nameTheUser={this.addAName}/>
+            </div>
+          ) : (
+           //<LandingPage >
+            <div>
+              
               <div className='wrapper'>
                 <SideNavbarMenu items={this.state.sideNavbarMenuItems} />
                 <div>{this.props.isAuthenticated}</div>
                 <div id='content'>
-                  <MainNavbarMenu />
+                  <MainNavbarMenu username={this.state.user}/>
 
                   <Route exact path='/transport-orders' component={Orders} />
                   <Route path='/companies' component={CreateCompany} />
@@ -60,11 +74,15 @@ class Main extends Component {
                 ))}
               </div>
             </div>
+           // </LandingPage>
           )}
+          
         </div>
+        
       </Router>
+      
     );
   }
 }
 
-export default withRouter(Main);
+export default Main;
