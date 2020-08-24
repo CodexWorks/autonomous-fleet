@@ -4,7 +4,14 @@ import Main from './containers/Main';
 
 class App extends Component {
   render() {
-    return <Main {...this.props} />;
+    
+    localStorage.setItem('token',null);
+    return (
+    <div>
+      
+      <Main {...this.props} />
+    </div>
+    );
   }
 }
 
