@@ -53,7 +53,6 @@ export default class LandingPage extends Component {
               <Switch>
                 <Route exact path='/' component={null} />
                 <Route path='/sign-in/' render={()=><Login nameTheUser={this.sendUserName}/>} />
-                {/* <Login nameTheUser={this.sendUserName}/> */}
                 <Route path='/sign-up/' render={()=><SignUp nameTheUser={this.sendUserName}/>} />
               </Switch>
             </div>

@@ -13,24 +13,26 @@ class MainNavbarMenu extends React.Component {
     const { cookies } = props;
 
     this.state = {
-      user: [2],
+      userName: this.props.username,
       companies: [],
       cookieValue: cookies.get('companyData'),
       selectedValue: cookies.get('companyIndex'),
     };
-
+    console.log(this.props.userName);
     console.log(this.state.cookieValue);
   }
 
   // REFACTOR!!
   componentDidMount() {
+    
     API.get('/company/user_companies/', {
       params: {
-        id: this.state.user[0],
+        username: this.state.userName,
       },
     })
       .then((res) => {
         const companyData = [];
+        
         // Getting the name and id of the company and putting them in an array
         res.data.map((item, index) => {
           companyData.push({
@@ -78,6 +80,7 @@ class MainNavbarMenu extends React.Component {
     });
   };
 
+
   // ############# RENDER ###########
   render() {
     // const { match, location, history } = this.props;
@@ -95,7 +98,7 @@ class MainNavbarMenu extends React.Component {
               <li className='nav-item active'>
                 <a className='nav-link' href='#'>
                   <i className='fas fa-user-tie' />
-                  HI, USER!
+                  HI, {this.state.userName}!
                 </a>
               </li>
               {/* <li className='nav-item dropdown'>

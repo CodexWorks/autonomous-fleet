@@ -73,7 +73,9 @@ export default class SignUp extends Component {
         this.state.email +" "+
         this.state.password1 +" "+
         this.state.password2  );
-    alert("onClick");
+    
+
+    // send data to the backend for account creation
     axios
       .post('http://localhost:8000/createUser/', {
         username: this.state.username,
@@ -82,7 +84,6 @@ export default class SignUp extends Component {
         password2: this.state.password2
     })
       .then((res) => {
-        alert("good");
         const token = res.data.key;
         localStorage.setItem('token', token); // sets token in browser local memory
         alert(token)
@@ -142,7 +143,7 @@ export default class SignUp extends Component {
             placeholder='Confirm password'
           />
         </div>
-
+          {/* put a <input button> instead <button> for not display the credential in url bar*/}
         <input type='button'
           className='btn btn-primary btn-block'
           onClick={this.onClikSendRegisteringData}
