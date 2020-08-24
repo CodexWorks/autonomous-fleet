@@ -1,12 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 
-export default class Login extends Component {
-  state = {
-    username: '',
-    password: '',
-  };
 
+
+ class Login extends Component {
+  
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      username: '',
+      password: '',
+      connect:false
+    };
+  }
   // ############### Event Handlers ###############
 
   /** Username field */
@@ -36,26 +43,37 @@ export default class Login extends Component {
     }
   };
 
+
+  addAName(){
+    this.props.nameTheUser(this.state.username);
+  }
+
   onClickSendLoginData = () => {
     const loginCredentials = {
       username: this.state.username,
-      password: this.state.password,
+      email: "",
+      password: this.state.password
     };
-
+      
     axios
-      .post('http://127.0.0.1:8000/rest-auth/login/', loginCredentials)
+      .post('http://localhost:8000/rest-auth/login/', loginCredentials)
       .then((res) => {
         const token = res.data.key;
         localStorage.setItem('token', token); // sets token in browser local memory
+        this.setState({connect: true});
+        this.addAName();
       })
       .catch((error) => {
-        console.log('POST user login error ' + error);
+        alert('POST user login error ' + error);
       });
+      
   };
 
   render() {
     return (
-      <form>
+      <Fragment>
+      {/* <Router> */}
+      <form >
         <h3>Sign In</h3>
 
         <div className='form-group'>
@@ -97,18 +115,25 @@ export default class Login extends Component {
           </div>
         </div>
 
-        <button
-          type='submit'
-          className='btn btn-primary btn-block'
-          onClick={this.onClickSendLoginData}
-          data-cy='login-submit'
-        >
-          Submit
-        </button>
+          {/* put a <input button> instead <button> for not display the credential in url bar*/}
+          <input 
+            type='button'
+            className='btn btn-primary btn-block'
+            onClick={this.onClickSendLoginData}
+            data-cy='login-submit'
+            value="submit"
+          />
+        
+       
         <p className='forgot-password text-right'>
           Forgot <a href='#'>password?</a>
         </p>
       </form>
+      
+      {/* </Router> */}
+      </Fragment>
     );
   }
 }
+
+export default Login;
