@@ -24,7 +24,6 @@ class MainNavbarMenu extends React.Component {
 
   // REFACTOR!!
   componentDidMount() {
-    
     API.get('/company/user_companies/', {
       params: {
         username: this.state.userName,
@@ -32,7 +31,7 @@ class MainNavbarMenu extends React.Component {
     })
       .then((res) => {
         const companyData = [];
-        
+
         // Getting the name and id of the company and putting them in an array
         res.data.map((item, index) => {
           companyData.push({
@@ -80,7 +79,6 @@ class MainNavbarMenu extends React.Component {
     });
   };
 
-
   // ############# RENDER ###########
   render() {
     // const { match, location, history } = this.props;
@@ -96,7 +94,7 @@ class MainNavbarMenu extends React.Component {
           <div className='collapse navbar-collapse' id='navbarSupportedContent'>
             <ul className='nav navbar-nav ml-auto'>
               <li className='nav-item active'>
-                <a className='nav-link' href='#'>
+                <a className='nav-link' href='#' data-cy='username'>
                   <i className='fas fa-user-tie' />
                   HI, {this.state.userName}!
                 </a>

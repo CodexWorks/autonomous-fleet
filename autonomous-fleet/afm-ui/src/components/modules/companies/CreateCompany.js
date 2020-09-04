@@ -14,7 +14,7 @@ export default class CreateCompany extends React.Component {
       vat_id: '',
       is_supplier: false,
       is_client: false,
-      adress: '',
+      address: '',
       country_id: '1',
       country: '',
       registration_number: '',
@@ -43,8 +43,8 @@ export default class CreateCompany extends React.Component {
       case 'client':
         this.setState({ is_client: event.target.value });
         break;
-      case 'adress':
-        this.setState({ adress: event.target.value });
+      case 'address':
+        this.setState({ address: event.target.value });
         break;
       case 'country':
         this.setState({ country: event.target.value });
@@ -65,7 +65,7 @@ export default class CreateCompany extends React.Component {
       vat_id: this.state.vat_id,
       is_supplier: this.state.is_supplier,
       is_client: this.state.is_client,
-      adress: this.state.adress,
+      address: this.state.address,
       country_id: this.state.country_id,
       country: this.state.country,
       registration_number: this.state.registration_number,
@@ -96,6 +96,7 @@ export default class CreateCompany extends React.Component {
       <div>
         <button
           type='button'
+          data-cy='addCompany'
           className='btn btn-primary'
           onClick={this.toggleShow}
         >
@@ -150,14 +151,14 @@ export default class CreateCompany extends React.Component {
             </div>
 
             <div className='form-group'>
-              <label>Adress:</label>
+              <label>Address:</label>
               <input
-                value={this.state.adress}
+                value={this.state.address}
                 type='text'
-                name='adress'
+                name='address'
                 onChange={this.handleChange}
                 className='form-control'
-                placeholder='Enter adress'
+                placeholder='Enter address'
               />
             </div>
 
