@@ -181,6 +181,80 @@ npm start
 ## _Step 5:_
 >open `localhost:3000` on your browser to view the app
 
+<br />
+
+# Using Git:
+
+## _Working on my first Git project:_
+```sh
+# [Step 1] Cloning a specific branch:
+git clone --single-branch --branch <branchname> <remote-repo>    
+# e.g., git clone --single-branch --branch feat-AH_Auth git@github.com:CodexWorks/autonomous-fleet.git
+
+# [Step 2] Checking the status of your files:
+git status
+## should output something along these lines:
+#---| On branch <branchname>
+#---| Your branch is up-to-date with 'origin/<branchname>'.
+#---| nothing to commit, working directory clean
+```
+
+## _Tracking/staging files, and adding your own commits:_
+> You need this after you do great work, and you want to push it to the remote repo.
+```sh
+# [Step 1] Checking the working tree:
+git status
+## should output something along these lines:
+#---| On branch <branchname>
+#---| Your branch is up-to-date with 'origin/<branchname>'.
+#---| Changes not staged for commit:
+#---|   (use "git add <file>..." to update what will be committed)
+#---|   (use "git restore <file>..." to discard changes in working directory)
+#---|       modified: <yourModifiedFile>
+
+# [Step 2] Staging a change:
+git add <yourModifiedFile>
+## should output something along these lines:
+#---| On branch <branchname>
+#---| Your branch is up-to-date with 'origin/<branchname>'.
+#---| Changes to be committed:
+#---|   (use "git restore --staged <file>..." to unstage)
+#---|
+#---|       modified: <yourModifiedFile>
+
+# [Step 3] Commiting a straged file:
+git commit -m 'My first commit'
+## should output something along these lines:
+#---| [<branchname> <index>] My first commit
+#---| 1 file changed, <n> insertions(+), <n> deletions(-)
+```
+
+## _When you want to update local branch to origin state, without commiting changes:_
+> You need this when one of your team mates pushed some changes to origin that created merging conflicts.
+```sh
+# [Step 1] Stashes your commits, cleans working directory; At this point, you can switch branches and do work elsewhere; your changes are stored on your stack:
+git stash
+
+# [Step 2] Updates local repo to origin's state:
+git pull
+
+# [Step 3] Applies the most recent stash to current local repo state:
+git stash apply
+
+## Additional useful commands:
+git branch -a                # Lists all available branches.
+
+git checkout <branchName>    # Switches branch to <branchName>.
+
+stash list                   # Lists the stashes you’ve stored.
+
+git stash apply stash@{<n>}  # ...where <n> is the stash's index from stash list; applies that specific stash to current local repo state.
+
+git status                   # Shows tracked and untracked paths in the working tree
+```
+
+<br />
+
 # Useful learning resources
 
 ### _Django:_
@@ -215,6 +289,7 @@ npm start
 
 > Video tutorial: https://www.youtube.com/watch?v=BxzO2M7QcZw
 
+<br />
 
 # Debugging
 
@@ -227,79 +302,4 @@ npm start
 ```console
 cmd.exe /c chcp 1252
 ```
-
-# Using Git:
-
-## _Working on my first Git project:_
-```sh
-# [Step 1] Cloning a specific branch:
-git clone --single-branch --branch <branchname> <remote-repo>    
-# e.g., git clone --single-branch --branch feat-AH_Auth git@github.com:CodexWorks/autonomous-fleet.git
-
-# [Step 2] Checking the status of your files:
-git status
-## should output something along these lines:
-#---| On branch <branchname>
-#---| Your branch is up-to-date with 'origin/<branchname>'.
-#---| nothing to commit, working directory clean
-```
-
-## _When you want to update local branch to origin state, without commiting changes:_
-> You need this when one of your team mates pushed some changes to origin that created merging conflicts.
-```sh
-# [Step 1] Stashes your commits, cleans working directory; At this point, you can switch branches and do work elsewhere; your changes are stored on your stack:
-git stash
-
-# [Step 2] Updates local repo to origin's state:
-git pull
-
-# [Step 3] Applies the most recent stash to current local repo state:
-git stash apply
-
-## Additional useful commands:
-git branch -a                # Lists all available branches.
-
-git checkout <branchName>    # Switches branch to <branchName>.
-
-stash list                   # Lists the stashes you’ve stored.
-
-git stash apply stash@{n}    # ...where n is the stash's index from stash list; applies that specific stash to current local repo state.
-
-git status                   # Shows tracked and untracked paths in the working tree
-```
-
-## _Tracking/staging files, and adding your own commits:_
-> You need this after you do great work, and you want to push it to the remote repo.
-```sh
-# [Step 1] Checking the working tree:
-git status
-## should output something along these lines:
-#---| On branch <branchname>
-#---| Your branch is up-to-date with 'origin/<branchname>'.
-#---| Untracked files:
-#---| (use "git add <file>..." to include in what will be committed)
-#---|
-#---| <yourModifiedFile>
-#---|
-#---| nothing added to commit but untracked files present (use "git add" to track)
-
-# [Step 2] Staging a change:
-git add <yourModifiedFile>
-## should output something along these lines:
-#---| On branch <branchname>
-#---| Your branch is up-to-date with 'origin/<branchname>'.
-#---| Changes to be committed:
-#---| (use "git reset HEAD <file>..." to unstage)
-#---|
-#---| modified:    <yourModifiedFile>
-
-# [Step 3] Commiting a straged file:
-git commit -m 'My first commit'
-## should output something along these lines:
-#---| On branch <branchname>
-#---| Your branch is up-to-date with 'origin/<branchname>'.
-#---| Changes to be committed:
-#---| (use "git reset HEAD <file>..." to unstage)
-#---|
-#---| modified:    <yourModifiedFile>
-```
+<br />
