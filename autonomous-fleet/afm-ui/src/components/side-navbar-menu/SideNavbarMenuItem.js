@@ -15,12 +15,16 @@ export default class SideNavbarMenuItem extends React.Component {
 
   // ############# RENDER ###########
   render() {
-    let displayComponent = this.state.primaryText.split(' ').join('');
+    let displayComponent = this.state.primaryText
+      .split(' ')
+      .join('')
+      .toLowerCase();
     return (
       <li>
         <NavLink
           to={this.state.route}
           activeClassName='active'
+          data-cy={displayComponent}
           activeStyle={{
             fontWeight: 'bold',
             background: '#6d7fcc',
