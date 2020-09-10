@@ -24,6 +24,7 @@ import { dateTime as now } from '../support/dateTime.js';
  * @returns {User} object with properties name, email, password
  */
 Cypress.Commands.add('signUp', (username, password) => {
+  cy.clearCookies();
   let user = new User(username, password);
   cy.visit('/sign-up');
   cy.contains('Sign Up');
@@ -33,6 +34,8 @@ Cypress.Commands.add('signUp', (username, password) => {
   cy.get('input[name=password1]').type(user.pass);
   cy.get('input[name=password2]').type(user.pass);
   cy.get('input[type=button]').click();
+  cy.wait(1000);
+  cy.get('[data-cy=username]');
   cy.writeFile(
     '../logs/userLogs.json',
     {
@@ -59,10 +62,22 @@ Cypress.Commands.add('signIn', (username, password) => {
   cy.get('input[name=password]').type(password);
   cy.get('input[type=button]').click();
 });
+
 //
 // -- This is a child command --
 // Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
 //
+
+Cypress.Commands.add('clickIfExist', (element) => {
+  cy.get('body').then((body) => {
+    if (body.find(element).length > 0) {
+      cy.get(element).click();
+      cy.log('succesful log in');
+      cy.pause();
+    }
+  });
+});
+
 //
 // -- This is a dual command --
 // Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
