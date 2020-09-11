@@ -3,10 +3,10 @@ import { API } from '../../utils/API';
 
 // ############### Constructor ###############
 export default class Companies extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      user: [2, 3],
+      user: this.props.nameTheUser,
       currentCompanies: [],
     };
   }
@@ -15,7 +15,7 @@ export default class Companies extends React.Component {
   componentDidMount() {
     API.get('/company/user_companies/', {
       params: {
-        id: this.state.user[0],
+        username: this.state.user,
       },
     })
       .then((res) => {

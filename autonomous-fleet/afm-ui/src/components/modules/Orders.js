@@ -4,20 +4,20 @@ import CurrentOrdersList from './orders/CurrentOrdersList';
 
 // ############### Constructor ###############
 export default class CurrentOrdersContainer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       currentOrders: [],
       isShowing: false,
-      user: [2, 3],
+      user: this.props.nameTheUser,
     };
   }
 
   onClick = () => {
-    const userId = this.state.user[1];
+    const userId = this.state.user;
 
     // e.g. query http://127.0.0.1:8000/api/transport-order/user_orders/?id=2
-    API.get(`/transport-order/user_orders/?id=${userId}`)
+    API.get('/transport-order/user_orders/',{params:{userId:userId}})
       .then((res) => {
         this.setState({
           currentOrders: res.data,

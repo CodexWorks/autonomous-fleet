@@ -50,22 +50,24 @@ class Main extends Component {
           {localStorage.getItem('token') === "null" ? (
             <div>
               {/* Remove route */}
-            <LandingPage nameTheUser={this.addAName}/>
+              <Route path="" render={()=><LandingPage nameTheUser={this.addAName}/>}/>
+            
             </div>
           ) : (
            //<LandingPage >
             <div>
-              
+              <Route path="" />
+              {alert("message")}
               <div className='wrapper'>
                 <SideNavbarMenu items={this.state.sideNavbarMenuItems} />
                 <div>{this.props.isAuthenticated}</div>
                 <div id='content'>
                   <MainNavbarMenu username={this.state.user}/>
 
-                  <Route exact path='/transport-orders' component={Orders} />
-                  <Route path='/companies' component={CreateCompany} />
-                  <Route path='/companies' component={Companies} />
-                  <Route path='/auction-house' component={AuctionHouse} />
+                  <Route exact path='/transport-orders' render={()=><Orders nameTheUser={this.state.user}/>}/>
+                  <Route path='/companies' render={()=><CreateCompany nameTheUser={this.state.user}/> }  />
+                  <Route path='/companies' render={()=><Companies nameTheUser={this.state.user}/> } />
+                <Route path='/auction-house' render={()=><AuctionHouse nameTheUser={this.state.user}/> }/>
                 </div>
               </div>
               <div className='App-content'>

@@ -4,11 +4,11 @@ import { API } from '../../../utils/API';
 
 // ############### Constructor ###############
 export default class CreateCompany extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      userName: this.props.nameTheUser,
       isShowing: false,
-
       company_id: '1',
       company_name: '',
       vat_id: '',
@@ -18,8 +18,9 @@ export default class CreateCompany extends React.Component {
       country_id: '1',
       country: '',
       registration_number: '',
-      user: [],
+    
     };
+    this.userpost();
   }
 
   toggleShow = () => {
@@ -58,7 +59,7 @@ export default class CreateCompany extends React.Component {
   };
 
   onClick = () => {
-    this.userpost();
+    
     let payload = {
       company_id: this.state.company_id,
       company_name: this.state.company_name,
@@ -81,8 +82,8 @@ export default class CreateCompany extends React.Component {
   // TODO: refactor this
   // Getting user id by using the token
   userpost() {
-    let data = { key: '959973fe4e734eb26c51ee4302794653b282679c' };
-    axios.post('http://127.0.0.1:8000/user/', data).then((res) => {
+    // let data = { key: '448450be3de6639c9eda512de9fcfb1f761a65b2' };
+    axios.post('http://127.0.0.1:8000/user/', {user:this.state.userName}).then((res) => {
       this.setState({
         user: [res.data.id],
       });
@@ -186,9 +187,9 @@ export default class CreateCompany extends React.Component {
               />
             </div>
 
-            <button data-cy='orders-btn' onClick={this.onClick}>
-              Add
-            </button>
+            <input type='button' data-cy='orders-btn' onClick={this.onClick} value='Add'/>
+            
+          
           </form>
         ) : (
           <p></p>
@@ -196,6 +197,7 @@ export default class CreateCompany extends React.Component {
       </div>
     );
   }
+
 
   // ############### Event Handlers ###############
 

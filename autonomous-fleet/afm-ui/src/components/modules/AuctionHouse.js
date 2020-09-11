@@ -9,7 +9,7 @@ export default class CurrentCompanies extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: [2, 3],
+      user: props.nameTheUser,
       auctionRooms: [],
       orders: [],
     };
@@ -17,9 +17,10 @@ export default class CurrentCompanies extends React.Component {
 
   // REFACTOR!!
   componentDidMount() {
-    const userId = this.state.user[1];
+    alert(this.state.user)
+    const userId = this.state.user;
 
-    API.get(`/auction-room/get_auction_rooms?id=${userId}`)
+    API.get('/auction-room/get_auction_rooms/',{params:{userId:userId}})
       .then((res) => {
         this.setState({
           auctionRooms: res.data,
