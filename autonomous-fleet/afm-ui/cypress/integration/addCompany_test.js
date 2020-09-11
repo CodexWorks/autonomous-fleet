@@ -1,14 +1,9 @@
 import Company from '../support/Company';
 import { dateTime as now } from '../support/dateTime.js';
-import {
-  randomString,
-  lowerCharString,
-  upperCharString,
-  numString,
-} from '../support/stringGenerator';
+import { stringGenerator } from '../support/stringGenerator';
 
-let username = 'LDX';
-let password = 'bm9ov3FiNmJnSqGh7zlkx2AJ8';
+const username = 'empsfp';
+const password = 'VYkosvdun7YLsWz8nH7zLtbzZ';
 
 describe('All sidebar buttons', () => {
   it("doesn't throw errors when logging in", function () {
@@ -22,10 +17,10 @@ describe('All sidebar buttons', () => {
   });
   it('fills form fields', function () {
     let company = new Company(
-      randomString(10),
-      randomString(10),
-      randomString(10),
-      numString(10),
+      stringGenerator(10),
+      stringGenerator(10),
+      stringGenerator(10),
+      stringGenerator(10, '0-9'),
       false
     );
     cy.get('input[name=name]').type(company.name);
