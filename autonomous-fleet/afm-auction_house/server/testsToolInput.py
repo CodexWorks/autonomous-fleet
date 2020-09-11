@@ -2,6 +2,11 @@ import re
 import exrex
 from .enumValidation import ValidationStatus
 
+
+# Tasks:
+# - Implement generation for int inputs
+# - Support for email inputs
+
 class TestTool():
 
     def __init__(self):
@@ -48,7 +53,8 @@ class TestTool():
             for _ in range(5):
                 # for value generate only following a pattern
                 list_output.append(self.match_str(regex+"{"+str(dim_min)+","+str(dim_max)+"}",ValidationStatus.Valid))
-            list_output=list_output+self.validation_dimension_str(regex,dim_max,dim_min)
+            if not (dim_max==None or dim_min==None):
+                list_output=list_output+self.validation_dimension_str(regex,dim_max,dim_min)
         print(len(list_output))
         return list_output
 
@@ -91,6 +97,7 @@ class TestTool():
     # Output: list with the generate value and the status\
     #
     def match_str(self,regex,validation_status):
+    
         return [exrex.getone(regex),validation_status]
 
 

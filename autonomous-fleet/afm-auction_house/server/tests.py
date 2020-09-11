@@ -35,7 +35,7 @@ class SignUpTest(TestCase):
                 list_credentials_info=[
                         [[self.credentials['username'],"[A-Za-z]",4,150],"username"],
                         [[self.credentials['password1'],"[A-Za-z0-9@#$%^&*]",8,150],"password1"], #I choose arbitrarily a minimum and a maximum length
-                        [[self.credentials['email'],"[A-Za-z0-9]+@[A-Za-z0-9]+\.[a-z]{,3}",6,150],"email"]
+                        [[self.credentials['email'],"[A-Za-z0-9]+@[A-Za-z0-9]+\.[a-z]{2,3}",None,None],"email"]
                 ]
                 for inp in list_credentials_info:
                         copy_credentials=self.credentials
@@ -44,7 +44,9 @@ class SignUpTest(TestCase):
                         for generate in list_inputs_generate:
                                 if inp[-1]=="password1":
                                         copy_credentials["password2"]=generate[0]
-
+                                pk=self.tests.match_str("[A-Za-z]{4,150}",ValidationStatus.Valid)[0]
+                                copy_credentials["username"]=pk
+                                print("message:")
                                 copy_credentials[inp[-1]]=generate[0]
                                 correct_credentials = str(copy_credentials).strip("'<>() ").replace('\'', '\"')
                                 response = self.client.post('/createUser/',correct_credentials,content_type='application/json')

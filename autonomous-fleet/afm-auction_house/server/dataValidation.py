@@ -6,7 +6,14 @@ class Validation_Data():
             "int":self.intInputValidation
         }
         
+    # Input: credentials - a list with information about the input:
+    #   -credential[0] - str, an input added manually used to decide its type and generate other inputs based on the type;
+    #   -credential[1] - str, a regex expresion used to generate new value;
+    #   -credential[2] - int, the minimum length of a generate value
+    #   -credential[3] - int, the maximum length of a generate value
+
     def entityField(self,credentials):
+        # <class 'type'>
         typeInput=str(type(credentials[0]))[8:-2]
         message=self.type_accept_input[typeInput](credentials[0],credentials[1],credentials[2], credentials[3])
         return message
@@ -25,8 +32,8 @@ class Validation_Data():
             return "The input does not have good length. The size must be in the range ["+str(dim_min)+","+str(dim_max)+"]."
         return None
 
-    def match_str(self,input_var,accept_char):
-        if bool(re.match(accept_char,input_var))==False:
+    def match_str(self,input_var,regex):
+        if bool(re.match(regex,input_var))==False:
             return "The input does not match the pattern."
         return None
 

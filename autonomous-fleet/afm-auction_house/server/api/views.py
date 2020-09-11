@@ -30,7 +30,8 @@ class TransportOrderViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'])
     def user_orders(self, request):
         data = request.query_params
-        orders = TransportOrder.objects.filter(user=data['id'])
+        id = User.objects.get(username=data["userId"]).pk
+        orders = TransportOrder.objects.all().filter(user=id)
         serializer = TransportOrderSerializer(orders, many=True)
         return Response(serializer.data)
 
@@ -88,9 +89,15 @@ class AuctionRoomViewSet(viewsets.ModelViewSet):
     def get_auction_rooms(self, request):
         data = request.query_params
         if request.method == 'GET':
-            user_req = getUserName(data)
-            auction_rooms = AuctionRoom.objects.filter(user=user_req)
+            # user_req = getUserName(data)
+            print("Data:",data)
+            id = User.objects.get(username=data["userId"]).pk
+            # user_req=data["userId"]
+            # print(id)
+            auction_rooms = AuctionRoom.objects.all().filter(user=id)
+            print(auction_rooms)
             serializer = AuctionRoomSerializer(auction_rooms, many=True)
+            # print(serializer.data)
             return Response(serializer.data)
 
 
@@ -98,8 +105,10 @@ class AuctionRoomViewSet(viewsets.ModelViewSet):
 def userInfo(request):
     data = json.loads(request.body.decode('utf-8'))
     if request.method == 'POST':
-        user = Token.objects.get(key=data['key']).user
-        return Response({"id": user.id})
+        # print(data)
+        id = User.objects.get(username=data['user']).pk
+        # print(id)
+        return Response({"id": id})
 
 
 
