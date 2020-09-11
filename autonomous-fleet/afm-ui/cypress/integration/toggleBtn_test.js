@@ -1,6 +1,11 @@
+const username = 'empsfp';
+const password = 'VYkosvdun7YLsWz8nH7zLtbzZ';
+
 describe('The toggle button', function () {
   it('is clickable', function () {
     cy.visit('/');
+    cy.signIn(username, password);
+    cy.wait(1000);
     cy.get('#sidebarCollapse').should('be.visible').click();
   });
   it('shrinks the sidebar', function () {
