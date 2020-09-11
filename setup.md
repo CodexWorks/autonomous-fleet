@@ -229,6 +229,24 @@ git commit -m 'My first commit'
 #---| 1 file changed, <n> insertions(+), <n> deletions(-)
 ```
 
+## _Pushing your commits to remote:_
+```sh
+git push origin <branchName>
+## should output something along these lines:
+#---| Enumerating objects: <number>, done.
+#---| Delta compression using up to <number> threads
+#---| Compressing objects: 100% (<number>/<number>), done.
+#---| Writing objects: 100% (<number>/<number>), <number> KiB | <number> MiB/s, done.
+#---| Total <number> (delta <number>), reused 0 (delta 0), pack-reused 0
+#---| remote: Resolving deltas: 100% (<number>/<number>), completed with <number> local objects.  
+#---| To github.com:CodexWorks/autonomous-fleet.git
+#---| <indexes>  <localBranchName> -> <remoteBranchName>
+
+
+# [NOTE] Sometimes, git won't allow you to push to remote if your local repo's state differs from the remote repo's state. In that case, if there are no merging conflicts, you have to pull first. Run this command:
+git pull
+```
+
 ## _When you want to update local branch to origin state, without commiting changes:_
 > You need this when one of your team mates pushed some changes to origin that created merging conflicts.
 ```sh
