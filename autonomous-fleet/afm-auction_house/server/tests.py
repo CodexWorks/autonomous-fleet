@@ -122,3 +122,69 @@ class LoginTest(TestCase):
                                         # Asert
                                         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST, FAILED + repr(response.content))
                                         self.assertFalse('key' in response.json(), FAILED + repr(response.content))
+#Test Class for company
+
+class CompanyTest(TestCase):
+        
+        def setUp(self):
+                """
+                Creates a new company with valid credentials
+                """
+
+                self.credentials = {
+                'username':     'testuser123',
+                'company_id':     '76',
+                'company_name':        'testcompany',
+                'vat_id':       'testid',
+                'is_supplier':  '0',
+                'is_client':    '1',
+                'address':      'testaddress',
+                'country_id':   '10',
+                'contry':       'testcountry',
+                'registration_number':  '192837'
+                }
+
+                self.client=APIClient()
+                self.tests=TestTool()
+        
+
+        def test_company_valid_credentials_ok(self):
+                # Act
+                response = self.client.post('/rest-auth/company/', self.credentials)
+
+                # Asert
+                self.assertEqual(response.status_code, status.HTTP_200_OK, FAILED + repr(response.content))
+                self.assertTrue('key' in response.json(), FAILED + repr(response.content))
+                self.assertTrue(len(response.json()['key']) == KEY_LENGTH, FAILED + repr(response.content))
+
+        def test_generate_company_credentials(self):
+                list_credentials_info=[
+                        [[self.credentials['user'],"[a-z]",4,150],"user"],
+                        [[self.credentials['company_id'],"[0-9]",1,8],"company_id"],
+                        [[self.credentials['company_name'],"[a-z]",4,250],"company_name"],
+                        [[self.credentials['vat_id'],"[a-z]",4,150],"vat_id"],
+                        [[self.credentials['is_supplier'],"[0-1]",1,1],"is_supplier"],
+                        [[self.credentials['is_client'],"[0-1]",1,1],"is_client"],
+                        [[self.credentials['address'],"[a-z0-9]",4,150],"address"],
+                        [[self.credentials['country_id'],"[0-9]",1,8],"country_id"],
+                        [[self.credentials['country'],"[a-z]",4,150],"country"],
+                        [[self.credentials['registration_number'],"[0-9]",1,8],"registration_number"]
+                ]
+                copy_credentials=self.credentials
+                for inp in list_credentials_info:
+                        list_inputs_generate=self.tests.entityField(inp[0]+["read"])
+
+                        self.credentials=copy_credentials
+                        for generate in list_inputs_generate:
+                                self.credentials[inp[-1]]=generate[0]
+                                if generate[1]==ValidationStatus.Valid:
+
+                                        response=self.client.post('/rest-auth/company/', self.credentials)
+                                        self.assertEqual(response.status_code, status.HTTP_200_OK, FAILED + repr(response.content))
+                                        self.assertTrue('key' in response.json(), FAILED + repr(response.content))
+                                        self.assertTrue(len(response.json()['key']) == KEY_LENGTH, FAILED + repr(response.content))
+                                else:
+                                        response = self.client.post('/rest-auth/company/', self.credentials)
+                                        # Asert
+                                        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST, FAILED + repr(response.content))
+                                        self.assertFalse('key' in response.json(), FAILED + repr(response.content))

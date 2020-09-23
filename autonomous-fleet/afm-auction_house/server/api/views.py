@@ -145,3 +145,38 @@ def createUser(request):
         except Exception as er:
             print("Error: ",er)
             return Response({'error':str(er)},status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['POST'])
+def createCompany(request):
+
+    data = json.loads(request.body.decode('utf-8'))
+
+    credentials=[
+                    [data['user'],"[a-zA-Z]",4,150],
+                    [data['company_id'],"[0-9]",1,8],
+                    [data['company_name'],"[a-zA-Z]",4,250],
+                    [data['vat_id'],"[a-zA-Z]",4,150],
+                    [data['is_supplier'],"[0-1]",1,1],
+                    [data['is_client'],"[0-1]",1,1],
+                    [data['address'],"[a-zA-Z0-9]",4,250],
+                    [data['country_id'],"[0-9]",1,8],
+                    [data['country'],"[a-zA-Z]",4,150],
+                    [data['registration_number'],"[0-9]",1,8],
+    ]
+
+    if request.method=="POST":
+        try:
+            validation=Validation_Data()
+            for inp in credentials:
+                message=validation.entityField(inp)
+                if not message==None:
+                    raise Exception(message)
+            company=Company(user=data["user"],company_id=data["company_id"],company_name=data["company_name"],vat_id=data["vat_id"],is_supplier=data["is_supplier"],is_client=data["is_client"],address=data["address"],country_id=data["country_id"],contry=data["country"],registration_number=data["registration_number"])
+            company.save()
+            token= Token.objects.create(company=company)
+            return Response({'key':token.key})
+        except Exception as er:
+            print("Error: ",er)
+            return Response({'error':str(er)},status=status.HTTP_400_BAD_REQUEST)
