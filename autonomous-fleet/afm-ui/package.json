@@ -5,7 +5,7 @@
   "dependencies": {
     "@popperjs/core": "^2.4.2",
     "all": "0.0.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "font-awesome": "^4.7.0",
     "http-proxy-middleware": "^1.0.4",
